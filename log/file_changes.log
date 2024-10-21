@@ -1,0 +1,37 @@
+2024-10-21 22:06:15 - Modified: .\log
+2024-10-21 22:06:15 - Modified: .\log\file_changes.log
+2024-10-21 22:06:15 - Modified: .\log\file_changes.log
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\env_util.py
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py
+2024-10-21 22:06:15 - Application démarrée avec succès. Youpie !
+2024-10-21 22:06:15 - Valeurs choisies : a:1.0, b:0.0
+2024-10-21 22:06:15 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\pyarrow\__pycache__\pandas_compat.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\pyarrow\vendored\__pycache__\version.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\491.c1a2c0b2.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\5764.5a55e5be.chunk.js
+2024-10-21 22:06:15 - Tableau des valeurs de x et y affichés.
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\matplotlib\backends\__pycache__\backend_agg.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\9114.1ee3d4dd.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\matplotlib\backends\_backend_agg.cp312-win_amd64.pyd
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\8648.92079acf.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\1260.e6289cc2.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\7193.2594a18c.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\media\SourceCodePro-Regular.84b900b88d09398d86b0.woff2
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\matplotlib\mpl-data\fonts\ttf\DejaVuSans.ttf
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\4297.3afbdd03.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\9943.6af344bb.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\238.8d3a7d25.chunk.js
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\BmpImagePlugin.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\GifImagePlugin.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\ImageMath.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\log\file_changes.log
+2024-10-21 22:06:15 - Modified: .\log\file_changes.log
+2024-10-21 22:06:15 - Modified: .\log\file_changes.log
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\_imagingmath.cp312-win_amd64.pyd
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\ImageOps.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\JpegImagePlugin.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\JpegPresets.cpython-312.pyc
+2024-10-21 22:06:15 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\PpmImagePlugin.cpython-312.pyc
+2024-10-21 22:06:15 - Graphique affiché avec succès !

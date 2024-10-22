@@ -1,3 +1,5 @@
 .venv
 .vscode
 .devcontainer
+*.pyc
+*.log

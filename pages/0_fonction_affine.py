@@ -57,7 +57,8 @@ def fonction_affine():
     logger.info(f'Valeurs choisies : a:{a}, b:{b}')
 
     # Sélecteur de couleur pour permettre à l'utilisateur de changer la couleur de la courbe
-    color = st.sidebar.color_picker('Choisissez la couleur de la courbe', '#0000FF')  # Couleur par défaut : bleu (#0000FF)
+    color = st.sidebar.color_picker('Choisissez la couleur de la courbe', '#FF4B4C')  # Couleur par défaut : rouge-orangé (#FF4B4C)
+    
 
     # Champs texte pour personnaliser le titre du graphique et les étiquettes des axes
     graph_title = st.sidebar.text_input('Titre du graphique', 'Graphique de la fonction affine')  # Titre par défaut
@@ -80,22 +81,48 @@ def fonction_affine():
         'x': x_values,  # Colonne des valeurs de x
         'y': y_values   # Colonne des valeurs de y
     })
+    
+    # Sélectionner uniquement les 10 premières valeurs
+    df_first_ten = df.head(10)
+    
+    # Tableau horizontale avec la methode "T" qui transpose le tableau 
+    df_horizontale = df_first_ten.T
+    
 
     # Afficher le tableau contenant les valeurs de x et y dans l'interface Streamlit
     st.write("Tableau des valeurs de x et y :")
-    st.dataframe(df)  # Affiche le tableau dans l'interface web
+    st.dataframe(df_horizontale)  # Affiche le tableau dans l'interface web
     logger.info('Tableau des valeurs de x et y affichés.')
 
     # Création du graphique de la fonction affine y = ax + b
     st.write("Graphique de la fonction y = ax + b :")
     fig, ax = plt.subplots(figsize=(8, 4))  # Création de la figure et de l'axe du graphique
     ax.plot(x_values, y_values, label=f'y = {a}x + {b}', color=color)  # Tracer la courbe avec la couleur choisie
-    ax.set_title(graph_title)  # Définir le titre du graphique
-    ax.set_xlabel(xlabel)  # Définir l'étiquette de l'axe des x
-    ax.set_ylabel(ylabel)  # Définir l'étiquette de l'axe des y
+    ax.set_title(graph_title, color='white')  # Définir le titre du graphique
+    ax.set_xlabel(xlabel, color='white')  # Définir l'étiquette de l'axe des x
+    ax.set_ylabel(ylabel, color='white')  # Définir l'étiquette de l'axe des y
+    
+    
+    # Personnaliser les repères et axes en blanc
+    ax.spines['top'].set_color('white')
+    ax.spines['bottom'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.spines['right'].set_color('white')
+    
+    
+    # Définir la couleur du texte en blanc
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.title.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+
+    # Fond transparent pour le graphique
+    fig.patch.set_alpha(0.0)  # Rendre la figure transparente
+    ax.set_facecolor((0, 0, 0, 0))  # Fond de l'axe transparent
 
     # Ajouter une légende dans le coin supérieur droit
-    ax.legend(loc='upper right')
+    ax.legend(loc='upper right',facecolor='black', edgecolor='white', labelcolor='white')
 
     # Afficher le graphique dans Streamlit
     st.pyplot(fig)

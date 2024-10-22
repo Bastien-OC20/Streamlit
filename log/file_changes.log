@@ -1,150 +1,69 @@
-2024-10-22 08:05:54 - Modified: .\.venv\Lib\site-packages\streamlit\env_util.py
-2024-10-22 08:05:54 - Modified: .\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py
-2024-10-22 08:05:54 - Modified: .\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py
-2024-10-22 08:05:54 - Application démarrée avec succès. Youpie !
-2024-10-22 08:05:54 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:05:54 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:05:54 - Modified: .\.venv\Lib\site-packages\pyarrow\__pycache__\pandas_compat.cpython-312.pyc
-2024-10-22 08:05:54 - Modified: .\.venv\Lib\site-packages\pyarrow\vendored\__pycache__\version.cpython-312.pyc
-2024-10-22 08:05:54 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:05:54 - Modified: .\.venv\Lib\site-packages\matplotlib\backends\__pycache__\backend_agg.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\matplotlib\backends\_backend_agg.cp312-win_amd64.pyd
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\491.c1a2c0b2.chunk.js
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\matplotlib\mpl-data\fonts\ttf\DejaVuSans.ttf
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\8648.92079acf.chunk.js
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\1260.e6289cc2.chunk.js
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\BmpImagePlugin.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\GifImagePlugin.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\ImageMath.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\7193.2594a18c.chunk.js
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\_imagingmath.cp312-win_amd64.pyd
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\ImageOps.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\JpegImagePlugin.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\JpegPresets.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\PIL\__pycache__\PpmImagePlugin.cpython-312.pyc
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\5764.5a55e5be.chunk.js
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\js\9114.1ee3d4dd.chunk.js
-2024-10-22 08:05:55 - Modified: .\.venv\Lib\site-packages\streamlit\static\static\media\SourceCodePro-Regular.84b900b88d09398d86b0.woff2
-2024-10-22 08:05:55 - Graphique affiché avec succès !
-2024-10-22 08:06:21 - Application démarrée avec succès. Youpie !
-2024-10-22 08:06:21 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:06:21 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:06:21 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:06:21 - Graphique affiché avec succès !
-2024-10-22 08:06:36 - Application démarrée avec succès. Youpie !
-2024-10-22 08:06:36 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:06:36 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:07:32 - Application démarrée avec succès. Youpie !
-2024-10-22 08:07:32 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:07:32 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:08:30 - Application démarrée avec succès. Youpie !
-2024-10-22 08:08:30 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:08:30 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:08:30 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:08:30 - Graphique affiché avec succès !
-2024-10-22 08:08:41 - Application démarrée avec succès. Youpie !
-2024-10-22 08:08:41 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:08:41 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:08:41 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:08:41 - Graphique affiché avec succès !
-2024-10-22 08:09:50 - Application démarrée avec succès. Youpie !
-2024-10-22 08:09:50 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:09:50 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:09:50 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:09:50 - Graphique affiché avec succès !
-2024-10-22 08:10:01 - Application démarrée avec succès. Youpie !
-2024-10-22 08:10:01 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:10:01 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:10:01 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:10:02 - Graphique affiché avec succès !
-2024-10-22 08:11:56 - Application démarrée avec succès. Youpie !
-2024-10-22 08:11:56 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:11:56 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:11:56 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:11:56 - Graphique affiché avec succès !
-2024-10-22 08:13:43 - Application démarrée avec succès. Youpie !
-2024-10-22 08:13:43 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:13:43 - Intervalle de x choisi : Min : -47.7, Max:10.0
-2024-10-22 08:13:43 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:13:43 - Graphique affiché avec succès !
-2024-10-22 08:13:44 - Application démarrée avec succès. Youpie !
-2024-10-22 08:13:44 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:13:44 - Intervalle de x choisi : Min : -49.65, Max:10.0
-2024-10-22 08:13:44 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:13:45 - Graphique affiché avec succès !
-2024-10-22 08:13:47 - Application démarrée avec succès. Youpie !
-2024-10-22 08:13:47 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:13:47 - Intervalle de x choisi : Min : 0.0, Max:10.0
-2024-10-22 08:13:47 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:13:47 - Graphique affiché avec succès !
-2024-10-22 08:13:53 - Application démarrée avec succès. Youpie !
-2024-10-22 08:13:53 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:13:53 - Intervalle de x choisi : Min : -50.0, Max:10.0
-2024-10-22 08:13:53 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:13:53 - Graphique affiché avec succès !
-2024-10-22 08:13:57 - Application démarrée avec succès. Youpie !
-2024-10-22 08:13:57 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:13:57 - Intervalle de x choisi : Min : 0.0, Max:10.0
-2024-10-22 08:13:57 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:13:57 - Graphique affiché avec succès !
-2024-10-22 08:13:59 - Application démarrée avec succès. Youpie !
-2024-10-22 08:13:59 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:13:59 - Intervalle de x choisi : Min : 0.0, Max:50.0
-2024-10-22 08:13:59 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:13:59 - Graphique affiché avec succès !
-2024-10-22 08:16:36 - Application démarrée avec succès. Youpie !
-2024-10-22 08:16:36 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:16:36 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:16:36 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:16:36 - Graphique affiché avec succès !
-2024-10-22 08:19:02 - Application démarrée avec succès. Youpie !
-2024-10-22 08:19:02 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:19:02 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:19:02 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:19:03 - Graphique affiché avec succès !
-2024-10-22 08:19:55 - Application démarrée avec succès. Youpie !
-2024-10-22 08:19:55 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:19:55 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:19:55 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:19:55 - Graphique affiché avec succès !
-2024-10-22 08:21:11 - Application démarrée avec succès. Youpie !
-2024-10-22 08:21:11 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:22:15 - Application démarrée avec succès. Youpie !
-2024-10-22 08:22:15 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:22:15 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:22:15 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:22:15 - Graphique affiché avec succès !
-2024-10-22 08:22:27 - Application démarrée avec succès. Youpie !
-2024-10-22 08:22:27 - Valeurs choisies : a:0.9, b:0.0
-2024-10-22 08:22:27 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:22:27 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:22:27 - Graphique affiché avec succès !
-2024-10-22 08:22:57 - Application démarrée avec succès. Youpie !
-2024-10-22 08:22:57 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:22:57 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:22:57 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:22:58 - Graphique affiché avec succès !
-2024-10-22 08:25:17 - Application démarrée avec succès. Youpie !
-2024-10-22 08:25:17 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:25:17 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:25:17 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:25:17 - Graphique affiché avec succès !
-2024-10-22 08:27:20 - Application démarrée avec succès. Youpie !
-2024-10-22 08:27:20 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:27:20 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:27:20 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:28:04 - Application démarrée avec succès. Youpie !
-2024-10-22 08:28:04 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:28:04 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:28:04 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:28:04 - Graphique affiché avec succès !
-2024-10-22 08:29:03 - Application démarrée avec succès. Youpie !
-2024-10-22 08:29:03 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:29:03 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:29:03 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:29:03 - Graphique affiché avec succès !
-2024-10-22 08:30:06 - Application démarrée avec succès. Youpie !
-2024-10-22 08:30:06 - Valeurs choisies : a:1.0, b:0.0
-2024-10-22 08:30:06 - Intervalle de x choisi : Min : -10.0, Max:10.0
-2024-10-22 08:30:06 - Tableau des valeurs de x et y affichés.
-2024-10-22 08:30:07 - Graphique affiché avec succès !
+2024-10-22 12:26:15 - Application démarrée avec succès. Youpie !
+2024-10-22 12:26:15 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:26:15 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:26:15 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:26:15 - Graphique affiché avec succès !
+2024-10-22 12:26:17 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:27:08 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:27:10 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:27:11 - Application démarrée avec succès. Youpie !
+2024-10-22 12:27:11 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:27:11 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:27:11 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:27:12 - Graphique affiché avec succès !
+2024-10-22 12:27:12 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:28:05 - Application démarrée avec succès. Youpie !
+2024-10-22 12:28:05 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:28:05 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:28:05 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:28:05 - Graphique affiché avec succès !
+2024-10-22 12:28:06 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:28:09 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:28:34 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:28:42 - Le fichier 'test.csv' est introuvable.
+2024-10-22 12:28:49 - L'application a été exécutée avec succès.
+2024-10-22 12:28:52 - Données chargées depuis test.csv.
+2024-10-22 12:28:59 - L'application a été exécutée avec succès.
+2024-10-22 12:29:41 - Données chargées depuis test.csv.
+2024-10-22 12:29:47 - L'application a été exécutée avec succès.
+2024-10-22 12:31:03 - Données chargées depuis test.csv.
+2024-10-22 12:31:09 - L'application a été exécutée avec succès.
+2024-10-22 12:32:36 - Application démarrée avec succès. Youpie !
+2024-10-22 12:32:36 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:32:36 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:32:36 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:32:37 - Graphique affiché avec succès !
+2024-10-22 12:32:37 - Données chargées depuis test.csv.
+2024-10-22 12:45:08 - Application démarrée avec succès. Youpie !
+2024-10-22 12:45:08 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:45:08 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:45:08 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:45:08 - Graphique affiché avec succès !
+2024-10-22 12:45:10 - Données chargées depuis test.csv.
+2024-10-22 12:45:16 - L'application a été exécutée avec succès.
+2024-10-22 12:46:04 - Données chargées depuis test.csv.
+2024-10-22 12:46:11 - L'application a été exécutée avec succès.
+2024-10-22 12:46:16 - Données chargées depuis test.csv.
+2024-10-22 12:46:23 - L'application a été exécutée avec succès.
+2024-10-22 12:46:57 - Données chargées depuis test.csv.
+2024-10-22 12:47:04 - L'application a été exécutée avec succès.
+2024-10-22 12:47:19 - Données chargées depuis test.csv.
+2024-10-22 12:47:26 - L'application a été exécutée avec succès.
+2024-10-22 12:48:39 - Données chargées depuis test.csv.
+2024-10-22 12:48:46 - L'application a été exécutée avec succès.
+2024-10-22 12:48:53 - Application démarrée avec succès. Youpie !
+2024-10-22 12:48:53 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:48:53 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:48:53 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:48:54 - Graphique affiché avec succès !
+2024-10-22 12:48:58 - Application démarrée avec succès. Youpie !
+2024-10-22 12:48:58 - Valeurs choisies : a:1.0, b:12.0
+2024-10-22 12:48:58 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:48:58 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:48:59 - Graphique affiché avec succès !
+2024-10-22 12:54:06 - Application démarrée avec succès. Youpie !
+2024-10-22 12:54:06 - Valeurs choisies : a:1.0, b:0.0
+2024-10-22 12:54:06 - Intervalle de x choisi : Min : -10.0, Max:10.0
+2024-10-22 12:54:06 - Tableau des valeurs de x et y affichés.
+2024-10-22 12:54:06 - Graphique affiché avec succès !
+2024-10-22 12:54:07 - Données chargées depuis test.csv.

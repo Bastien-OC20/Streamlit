@@ -8,7 +8,9 @@ import logging
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 from watchdog.observers import Observer
+from streamlit_navigation_bar import st_navbar
 
+st.set_page_config(initial_sidebar_state="expanded", page_icon="🧮")
 
 # Créer le dossier log s'il n'existe pas
 if not os.path.exists('log'):
@@ -27,6 +29,7 @@ logger_blacklist = [
 ]
 
 logger = logging.getLogger()  # Création d'un logger
+
 
 # Gestionnaire d'événements pour la surveillance de fichiers
 class MyHandler(FileSystemEventHandler):

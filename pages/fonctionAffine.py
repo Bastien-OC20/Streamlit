@@ -3,48 +3,54 @@ import streamlit as st
 import numpy as np  
 import pandas as pd  
 import matplotlib.pyplot as plt
-import time
+# import time
 import logging
-from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler, FileSystemEventHandler
-from watchdog.observers import Observer
-from streamlit_navigation_bar import st_navbar
+# from watchdog.observers import Observer
+# from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+# from watchdog.observers import Observer
+# from streamlit_navigation_bar import st_navbar
 
-st.set_page_config(initial_sidebar_state="expanded", page_icon="🧮")
+# st.set_page_config(initial_sidebar_state="expanded", page_icon="🧮")
 
-# Créer le dossier log s'il n'existe pas
-if not os.path.exists('log'):
-    os.makedirs('log')
-
-# Configuration de la journalisation
-logging.basicConfig(level=logging.INFO,  # Définir le niveau de journalisation
-                    format='%(asctime)s - %(message)s',  # Format du message
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='log/file_changes.log',  # Fichier journal
-                    filemode='w')  # Mode d'écriture
-
-logger_blacklist = [
-    '.streamlist',
-    'Log',
-]
-
-logger = logging.getLogger()  # Création d'un logger
+# # Créer le dossier log s'il n'existe pas
+# if not os.path.exists('log'):
+#     os.makedirs('log')
 
 
-# Gestionnaire d'événements pour la surveillance de fichiers
-class MyHandler(FileSystemEventHandler):
-    def on_modified(self, event):
-        logging.info(f'Modified: {event.src_path}')
+# # Configuration de la journalisation
+# logging.basicConfig(level=logging.INFO,  # Définir le niveau de journalisation
+#                     format='%(asctime)s - %(message)s',  # Format du message
+#                     datefmt='%Y-%m-%d %H:%M:%S',
+#                     filename='log/file_changes.log',  # Fichier journal
+#                     filemode='w')  # Mode d'écriture
+
+# logger_blacklist = [
+#     '.streamlist',
+#     'Log',
+# ]
+
+# logger = logging.getLogger()  # Création d'un logger
+
+
+# # Gestionnaire d'événements pour la surveillance de fichiers
+# class MyHandler(FileSystemEventHandler):
+#     def on_modified(self, event):
+#         logging.info(f'Modified: {event.src_path}')
     
-    def on_created(self, event):
-        logging.info(f'Created: {event.src_path}')
+#     def on_created(self, event):
+#         logging.info(f'Created: {event.src_path}')
         
-    def on_deleted(self, event):
-        logging.info(f'Deleted: {event.src_path}')
+#     def on_deleted(self, event):
+#         logging.info(f'Deleted: {event.src_path}')
 
 
 # Fonction principale pour gérer la création du graphique de la fonction affine
-def fonction_affine():
+def show_fonctionAffine():
+
+    # st.set_page_config(initial_sidebar_state="expanded", page_icon="🧮")
+
+
+    # def fonction_affine():
     # Titre de l'application dans la page Streamlit
     st.title('Graphique de la fonction affine')
     logger = logging.getLogger()  # Création d'un logger
@@ -132,20 +138,22 @@ def fonction_affine():
     logger.info('Graphique affiché avec succès !')
     
     
-    # Configurer l'observateur pour surveiller les modifications dans le répertoire courant
-event_handler = MyHandler()  # Créer une instance de LoggingEventHandler
-observer = Observer()  # Créer un observateur
-path = '.'  # Surveiller le répertoire courant
-for module in logger_blacklist :
-    observer.schedule(event_handler, path, recursive=True)  # Planifier l'observateur
-observer.start()  # Démarrer l'observateur
+# # Configurer l'observateur pour surveiller les modifications dans le répertoire courant
+# event_handler = MyHandler()  # Créer une instance de LoggingEventHandler
+# observer = Observer()  # Créer un observateur
+# path = '.'  # Surveiller le répertoire courant
+# for module in logger_blacklist :
+#     observer.schedule(event_handler, path, recursive=True)  # Planifier l'observateur
+# observer.start()  # Démarrer l'observateur
 
-# Appel de la fonction principale lorsque l'application Streamlit est exécutée
-if __name__ == "__main__":
-    try:
-        fonction_affine()  # Exécuter la fonction
-    except KeyboardInterrupt:
-        observer.stop()  # Arrêter l'observateur si une interruption est reçue
-    finally:
-        observer.stop()  # Arrêter l'observateur
-        observer.join()  # Joindre l'observateur
+# # Appel de la fonction principale lorsque l'application Streamlit est exécutée
+# if __name__ == "__main__":
+#     try:
+#         fonction_affine()  # Exécuter la fonction
+#     except KeyboardInterrupt:
+#         observer.stop()  # Arrêter l'observateur si une interruption est reçue
+#     finally:
+#         observer.stop()  # Arrêter l'observateur
+#         observer.join()  # Joindre l'observateur
+
+show_fonctionAffine()

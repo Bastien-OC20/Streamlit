@@ -8,8 +8,7 @@ class ConnectService:
     def __int__():
         pass
 
-    def __checkEmail(self, email:str):
-        # repository = 
+    def __checkEmail(self, email:str): #TODO Data base
         return True
 
     def __checkPassword(self, password:str, hash:str)->bool:

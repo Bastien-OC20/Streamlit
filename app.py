@@ -4,7 +4,6 @@ import streamlit as st
 import directory as pg
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler, FileSystemEventHandler
-# from streamlit_navigation_bar import st_navbar 
 
 # Configuration de la page
 st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded", page_icon="📊")
@@ -32,7 +31,7 @@ def logout():
     if st.button("Log out"):
         st.session_state.logged_in = False
         st.rerun()
-################################################################# page
+################################################################# menu
 
 # icone : https://mui.com/material-ui/material-icons/
 login_page = st.Page(login, title="Log in", icon=":material/login:")
@@ -63,82 +62,6 @@ else:
     pg = st.navigation([login_page])
 
 pg.run()
-################################################################# menu
-# st.set_page_config(initial_sidebar_state="expanded")
-
-# Définir les pages
-# pages = ["Home", "Documentation", "Fonction Affine"]
-# # page = ["Home", "Documentation", "Hello", "Fonction Affine", "About"]
-
-# styles = {
-#     "nav": {
-#         "background-color": "royalblue",
-#         "justify-content": "left",
-#         # "background-color": "white",
-#     },
-#     "img": {
-#         "padding-right": "14px",
-#     },
-#     "span": {
-#         "color": "white",
-#         "padding": "14px",
-#     },
-#     "active": {
-#         "background-color": "white",
-#         "color": "white",
-#         "font-weight": "normal",
-#         "padding": "14px",
-#     }
-# }
-# # Contenu principal
-# if pages == "Documentation":
-#     st.switch_page("pages/documentation.py")
-# # elif page == "Hello":
-# #     st.switch_page("pages/hello.py")
-# elif pages == "Fonction Affine":
-#     st.switch_page("pages/fonctionAffine.py")
-# # elif page == "About":
-# #     st.switch_page("pages/about.py")
-# else:
-#     st.switch_page("pages/home.py")
-
-# match pages:
-#     case "Documentation":
-#         st.switch_page("pages/documentation.py")
-#     case "Fonction Affine":
-#         st.switch_page("pages/fonctionAffine.py")
-#     case _:
-#         st.switch_page("pages/home.py")
-
-
-
-
-
-# options = {
-#     "show_menu": True,
-#     "show_sidebar": False,
-# }
-
-# page = st_navbar(
-#     pages,
-#     # logo_path=logo_path,
-#     # urls=urls,
-#     styles=styles,
-#     options=options,
-# )
-
-# functions = {
-#     "Home": pg.show_home,
-#     "Documentation": pg.show_documentation,
-#     "Fonction Affine": pg.show_fonctionAffine,
-#     # "API": pg.show_api,
-#     # "Examples": pg.show_examples,
-#     # "Community": pg.show_community,
-# }
-# go_to = functions.get(page)
-# if go_to:
-#     go_to()
-
 
 ################################################################# log
 # Créer le dossier log s'il n'existe pas
@@ -150,18 +73,6 @@ logging.basicConfig(level=logging.INFO,  # Définir le niveau de journalisation
                     datefmt='%Y-%m-%d %H:%M:%S',
                     filename='log/file_changes.log',  # Fichier journal
                     filemode='w')  # Mode d'écriture
-
-# logger_blacklist = [
-#     '.streamlist',
-#     'Log',
-# ]
-
-# logger = logging.getLogger()  # Création d'un logger
-
-
-
-
-
 
 # Gestionnaire d'événements pour la surveillance de fichiers
 class MyHandler(FileSystemEventHandler):

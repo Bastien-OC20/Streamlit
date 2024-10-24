@@ -5,8 +5,8 @@ import directory as pg
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 
-from directory.services.haschService import haschService
-from directory.services.connectionService import ConnectService
+from services.haschService import haschService
+from services.connectionService import ConnectService
 # from directory.services.sessionService import sessionService
 
 
@@ -37,6 +37,8 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 def login(mail:str, passord:str, hash:str):
+    if st.button("Ajouter un utilisateur"):
+        pass
 
     if not myConectionService.verifyConnect(mail,passord, hash):
         return None
@@ -58,34 +60,52 @@ def myLoginTrue(): login(myEmail, myPassord, myHash)
 login_page = st.Page((myLoginTrue), title="Log in", icon=":material/login:")
 logout_page = st.Page(logout, title="Log out", icon=":material/logout:")
 
-documentation = st.Page(
+documentation_page = st.Page(
     "directory/documentation.py", title="Documentation", icon=":material/dashboard:"
 )
-fonctionAffine = st.Page(
+fonctionAffine_page = st.Page(
     "directory/fonctionAffine.py", title="Fonction affine", icon=":material/functions:"
 )
-hello = st.Page(
+hello_page = st.Page(
     "directory/hello.py", title="Hello", icon=":material/waving_hand:"
 )
-home = st.Page(
+home_page = st.Page(
     "directory/home.py", title="Home", default=True, icon=":material/home:"
 )
-print(f" -- st.session_state.logged_in : {st.session_state.logged_in}")
+
+register_page = st.Page(
+    "directory/register.py",title="REgister", icon=":material/account_circle:"
+)
+# print(f" -- st.session_state.logged_in : {st.session_state.logged_in}")
 if st.session_state.logged_in:
 
     pg = st.navigation(
         {
             "Account": [logout_page],
-            "Accueil": [home, hello],
-            "Tools": [fonctionAffine],
-            "Documentation": [documentation],
+            "Accueil": [home_page, hello_page],
+            "Tools": [fonctionAffine_page],
+            "Documentation": [documentation_page],
+            "Compte utilisateur":[register_page]
         }
     )
-    print(f" login-- st.session_state.logged_in : {st.session_state.logged_in}")
+    # print(f" login-- st.session_state.logged_in : {st.session_state.logged_in}")
 
 else:
+    default = True        
     print(f" logout-- st.session_state.logged_in : {st.session_state.logged_in}")
-    pg = st.navigation([login_page])
+    
+    left, right = st.columns(2)
+    def myLeftBt()->bool:
+        return right.button("login", icon="🔥", use_container_width=True)
+    
+    if left.button("Nouvel utilisateur", icon="😃", use_container_width=True):
+        default = False
+        pg = st.navigation([register_page])
+    if myLeftBt() or default:
+    # if right.button("login", icon="🔥", use_container_width=True):
+        pg = st.navigation([login_page])
+
+
 
 pg.run()
 
@@ -124,5 +144,5 @@ logger_blocklist = [ # Surveiller le répertoire suivant
     "img",
 ]
 
-for module in logger_blocklist:
-    observer.schedule(event_handler, module, recursive=False)
+# for module in logger_blocklist:
+#     observer.schedule(event_handler, module, recursive=False)

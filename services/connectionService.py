@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from directory.services.haschService import haschService
+from services.haschService import haschService
+from Entity.User import User
 
 @dataclass
 class ConnectService:

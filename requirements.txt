@@ -5,3 +5,5 @@ plotly-express
 numpy
 pytest
 streamlit-navigation-bar
+keyboard
+argon2-cffi

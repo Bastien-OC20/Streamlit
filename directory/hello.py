@@ -5,31 +5,19 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 import logging
+from pathlib import Path
 
 
 # Chemins des dossiers log/ et img/ au niveau n-1
 # log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '/log/')
-# img_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '/img/')
-
-# Création des dossiers s'ils n'existent pas
-# os.makedirs(log_dir, exist_ok=True)
-# os.makedirs(img_dir, exist_ok=True)
-
-# Configuration du logger
-# log_file_path = os.path.join(log_dir, 'app.log')
-
-# logger = logging.getLogger(__name__)
+# file_dir = os.path.dirname(os.path.abspath(__file__))
+# print(file_dir)
+# print(f"{Path(__file__).parent.parent}/img/")
 
 
-# logging.basicConfig(level=logging.INFO,
-#                     format='%(asctime)s - %(levelname)s - %(message)s',
-#                     handlers=[
-#                         logging.FileHandler(log_file_path),
-#                         logging.StreamHandler()
-#                     ])
-
-# st.set_page_config(page_title="Visualisation des données", layout="wide", page_icon="ℹ️")
-
+img_dir = f"{Path(__file__).parent.parent}/img/"
+# Création dossier s'ils n'existe pas
+os.makedirs(img_dir, exist_ok=True)
 
 st.markdown("""
 <style>
@@ -254,12 +242,12 @@ plt.title('Histogramme de Ma colonne')
 
 st.pyplot(plt.gcf())
 
-# image_path = os.path.join(img_dir, "histogramme.png")
-# plt.savefig(image_path)
-# st.success("Graphique enregistré sous histogramme.png")
+image_path = os.path.join(img_dir, "histogramme.png")
+plt.savefig(image_path)
+st.success("Graphique enregistré sous histogramme.png")
 
-# with open(image_path, "rb") as file:
-#     st.download_button("Télécharger le graphique", file, "histrogramme.png", "image/png")
+with open(image_path, "rb") as file:
+    st.download_button("Télécharger le graphique", file, "histogramme.png", "image/png")
     
 logging.info("L'application a été exécutée avec succès.")
 

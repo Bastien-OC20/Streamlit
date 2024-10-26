@@ -4,28 +4,7 @@ from services.Verifications import VerificationsService
 from services.UserService import UserService
 from Entity.Roles import Roles
 from Entity.User import User
-
-@st.dialog("Erreur d'enregistrement")
-def DialogRegistredUserError(error_message:str):
-    st.write(f"Données non conformes")
-    st.write(f"détail : {error_message}")
-    if st.button("Ok"):
-        st.rerun()
-
-@st.dialog("Enregistrement réalisé")
-def DialogRegistredUserOK(user:User):
-    st.write(f"Utilisateur {user.nom} est enregistré !")
-    if st.button("Ok"):
-        st.rerun()
-
-@st.dialog("Erreur création")
-def DialogCreationError():
-    st.write(f"Erreur")
-    st.write(f"""détail : 
-                    Erreur lors de la création de l'utilisateur
-            """)
-    if st.button("Ok"):
-        st.rerun()
+from directory.dialogBox.DialogBox import DialogBox
 
 def show_user():
 
@@ -87,26 +66,29 @@ def show_user():
         resultCheck = checkData()
         userCreated = None
         if  st.button("enregistrer"):
-            # resultCheck = checkData()
-            # st.write(resultCheck)
             if isinstance(resultCheck, str):
-                DialogRegistredUserError(resultCheck)
+                reason="Erreurs dans les données rentrées"
+                DialogBox.DLgInfoMessage(reason, resultCheck)
                 return
             try:
                 myUser = User.ConstructUser(name,password,email,postalCode,age,size,weight,Roles.User)
                 userCreated = __userService.CreateUserRoleUser(myUser)
 
             except ValueError as e:
-                DialogRegistredUserError(e)
+                reason="Erreur d'enregistrement"
+                DialogBox.DLgInfoMessage(reason, e)
             
             except Exception:
-                DialogCreationError()
+                reason="Erreur inattendue"
+                DialogBox.DLgErreur(reason)
 
             else: # permet de réaliser la suite du code après le try qui c'est bien passé
                 if userCreated is None:
-                    DialogCreationError()
+                    reason="Erreur dans la création de l'utilisateur"
+                    DialogBox.DLgErreur(reason)
                     return
-                DialogRegistredUserOK(userCreated)
+                reason=f"Enregistrement réussi de l'utilisateur {name}"
+                DialogBox.DLgInfoMessage(reason,userCreated)
                 st.session_state.logged_in = True
 
     else:

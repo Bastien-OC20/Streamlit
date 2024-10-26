@@ -374,17 +374,10 @@ class UserService:
     
     @classmethod
     def FindUserByEmail(cls, trs: transiant_connection) -> User:
-        print("User service - FindUserByEmail")
-        # print(cls.__verificationService.IsEmail(trs["email"]))
         mail = trs
-        print("mail")
-        print(trs)
         if cls.__verificationService.IsEmail(trs.email):
-            print("is email ok")
             myUser = cls.__repoUserCSV.FindUserByEmail(trs.email)
-            print("fin OK FindUserByEmail")
             return myUser
-        print("fin nok FindUserByEmail")
         return None
 
     

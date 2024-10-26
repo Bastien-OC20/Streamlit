@@ -3,17 +3,11 @@ from services.Verifications import VerificationsService
 from services.connectionService import ConnectService
 from Transiant.transiant_connection import trs_connection
 from services.connectionService import ConnectService
-
-@st.dialog("Error")
-def DialogError(error_message):
-    st.write(f"App error")
-    st.write(f"reason: {error_message}")
-    if st.button("Ok"):
-        st.rerun()
-
+from directory.dialogBox.DialogBox import DialogBox
 
 def show_login():
 
+    # myDialogBox = DialogBox()
     st.session_state.active_page = "login_page"
     __myConectionService = ConnectService()
 
@@ -30,15 +24,18 @@ def show_login():
         try:
             repone = __myConectionService.verifyConnect(myTrs_connection)
             if not repone:
-                DialogError("Connexion impossible")
+                reason="Connexion impossible"
+                msg = "Vos identifiants ne sont pas reconnus"
+                # DialogError("Connexion impossible")
+                DialogBox.DLgInfoMessage(reason,msg)
                 return
             
             st.session_state.logged_in = True
             st.rerun()
 
         except Exception as e:
+            reason = "Erreur de connexion !"
             st.write("erreur de connexion !")
-            print("erreur de connexion :[ ")
-            DialogError(e)
+            DialogBox.DLgInfo(reason)
 
 show_login()

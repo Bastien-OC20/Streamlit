@@ -1,4 +1,5 @@
 from argon2 import PasswordHasher
+from Transiant import transiant_connection
 
 from dataclasses import dataclass
 
@@ -8,15 +9,17 @@ class haschService():
     __ph = PasswordHasher()
 
     def HashPassord(self,password:str)->str:
-
         return self.__ph.hash(password)
     
-    def checkPassorwd(self, password:str, hash:str)->bool:
+    def checkPassorwd(self, trs:transiant_connection, hash)->bool:
         try:
-            if self.__ph.verify(hash, password):
+            # hash = self.__ph.hash(trs.password)
+            # if self.__ph.verify(self.__ph.hash(trs.password), trs.password):
+            if self.__ph.verify(hash, trs.password):
                 # Best practice to check – and if necessary rehash – passwords after each successful authentication.
                 # https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.PasswordHasher.check_needs_rehash
                 self.__ph.check_needs_rehash(hash) 
+                print("checkPassorwd OK")
                 return True
         except Exception as e:
             print(f"checkPassorw => An error occurred: {e}")

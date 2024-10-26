@@ -23,8 +23,10 @@ class VerificationsService:
         __reEmail = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
         try:
             if not re.match(__reEmail, email):
+                print("isemail vérif NO")
                 return False
             return True
+
         except re.error as e:
             print("Error occurred:", e.msg)
             print("Pattern:", e.pattern)

@@ -15,18 +15,19 @@ class UserRepositoryCSV():
     __header:pd.DataFrame = None
 
     def __init__(self):
-        # img_dir = f"{Path(__file__).parent.parent}/img/" #TODO
-
-        absolutepath = os.path.abspath(__file__)
-        fileDirectory = os.path.dirname(absolutepath)
-        parentDirectory = os.path.dirname(fileDirectory)
-        parentDirectory = parentDirectory.replace('\\', '/')
-        pathParentDirectory = Path(parentDirectory)
-        secondParentDirectory = pathParentDirectory.parent.parent
-        secondParentDirectory = str(secondParentDirectory).replace('\\', '/') 
-        self.__filePath = secondParentDirectory + self.__file
-        self.__header = self.__getHeaderDataFrameFromCSV()
-        print("construct repository for CRUD")
+        self.__filePath = f"{Path(__file__).parent.parent.parent}/DataBase/user.csv" #TODO
+        # print("self.__filePath")
+        # print(self.__filePath)
+        # absolutepath = os.path.abspath(__file__)
+        # fileDirectory = os.path.dirname(absolutepath)
+        # parentDirectory = os.path.dirname(fileDirectory)
+        # parentDirectory = parentDirectory.replace('\\', '/')
+        # pathParentDirectory = Path(parentDirectory)
+        # secondParentDirectory = pathParentDirectory.parent.parent
+        # secondParentDirectory = str(secondParentDirectory).replace('\\', '/') 
+        # self.__filePath = secondParentDirectory + self.__file
+        # self.__header = self.__getHeaderDataFrameFromCSV()
+        print("Path CSV Data" + "="*80)
         print(self.__filePath)
         print("")
 
@@ -73,12 +74,19 @@ class UserRepositoryCSV():
         """""
         Add user in CSV file if user type is User & email doesn't exist
         """""
+        print("usr - DAL create " + "-"*80)
+        print(user)
         if not User.IsInstanceOfUser(user):
-            return None
+            #  return None
+            raise ValueError("Erreur dasn les paramètres")
+        
         df = self.FindAll()
+        print("data frame")
+        print(df)
         if (df['email'].isin([user.email]).any()) or df['nom'].isin([user.nom]).any():
-            print("This user already exists")
-            return None
+            print("This user already exists, mail or name")
+            raise ValueError(f"C'est utilisateur exsite déjà soit : \"{user.email}\", ou soit : \"{user.nom}\" est déjà présent.")
+        
         result = self.__addUserInCSV(user)
         return result
     
@@ -308,6 +316,25 @@ class UserRepositoryCSV():
             df = self.FindAll()
             indexUser = df.index.get_loc(df[df["nom"]==name].index[0])
             return df.loc[df.index[indexUser]]
+        except IndexError:
+            return None
+    
+    def FindDfUserByEmail(self, email: str) -> pd.DataFrame:
+        try:
+            df = self.FindAll()
+            indexUser = df.index.get_loc(df[df["email"]==email].index[0])
+            return df.loc[df.index[indexUser]]
+        except IndexError:
+            return None
+    
+    def FindUserByEmail(self, email: str) -> User:
+        try:
+            df = self.FindAll()
+            indexUser = df.index.get_loc(df[df["email"]==email].index[0])
+            df_user = df.loc[df.index[indexUser]]
+            myuser = User.UserFromRowDf(df_user)
+            # return df.loc[df.index[indexUser]]
+            return myuser
         except IndexError:
             return None
             

@@ -2,16 +2,18 @@ import os
 import logging
 import streamlit as st
 import directory as pg
+import re
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 
-from services.haschService import haschService
-from services.connectionService import ConnectService
-# from directory.services.sessionService import sessionService
+####################### LOGIN OK
+# kiki@free.fr / 1234
+# lol@free.fr /1234
 
 
 # Configuration de la page
-st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded", page_icon="📊")
+st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded")
+# st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded", page_icon="📊")
 
 # Ajouter un logo
 logo_path = "img/logo.png" 
@@ -23,42 +25,19 @@ st.image(logo_path, width=450)
 #     </div>
 #     """, unsafe_allow_html=True
 # )
-################################################################# login
-myHaschService = haschService()
-myHaschService.check()
-myConectionService = ConnectService()
-
-
-myEmail = "my@mail.fr"
-myPassord = "password"
-myHash = myHaschService.HashPassord(myPassord)
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
-
-def login(mail:str, passord:str, hash:str):
-    if st.button("Ajouter un utilisateur"):
-        pass
-
-    if not myConectionService.verifyConnect(mail,passord, hash):
-        return None
-    if st.button("Log in"):
-        st.session_state.logged_in = True
-
-        st.rerun()
-
-def logout():
-    if st.button("Log out"):
-
-        st.session_state.logged_in = False
-        st.rerun()
-
-def myLoginTrue(): login(myEmail, myPassord, myHash)
+if "visibility" not in st.session_state:
+    st.session_state.visibility = "visible"
+    st.session_state.disabled = False
+if "active_page" not in st.session_state:
+    st.session_state.active_page = "login_page"
 
 ################################################################# menu
 # icone : https://mui.com/material-ui/material-icons/
-login_page = st.Page((myLoginTrue), title="Log in", icon=":material/login:")
-logout_page = st.Page(logout, title="Log out", icon=":material/logout:")
+login_page = st.Page(("directory/connection/login.py"), title="Log in", icon=":material/login:")
+logout_page = st.Page("directory/connection/logout.py", title="Log out", icon=":material/logout:")
 
 documentation_page = st.Page(
     "directory/documentation.py", title="Documentation", icon=":material/dashboard:"
@@ -73,39 +52,30 @@ home_page = st.Page(
     "directory/home.py", title="Home", default=True, icon=":material/home:"
 )
 
-register_page = st.Page(
-    "directory/register.py",title="REgister", icon=":material/account_circle:"
+user_page = st.Page(
+    "directory/user.py",title="REgister", icon=":material/account_circle:"
 )
-# print(f" -- st.session_state.logged_in : {st.session_state.logged_in}")
-if st.session_state.logged_in:
 
+if st.session_state.logged_in:
     pg = st.navigation(
         {
             "Account": [logout_page],
             "Accueil": [home_page, hello_page],
             "Tools": [fonctionAffine_page],
             "Documentation": [documentation_page],
-            "Compte utilisateur":[register_page]
+            "Compte utilisateur":[user_page]
         }
     )
-    # print(f" login-- st.session_state.logged_in : {st.session_state.logged_in}")
 
 else:
-    default = True        
-    print(f" logout-- st.session_state.logged_in : {st.session_state.logged_in}")
-    
     left, right = st.columns(2)
-    def myLeftBt()->bool:
-        return right.button("login", icon="🔥", use_container_width=True)
-    
-    if left.button("Nouvel utilisateur", icon="😃", use_container_width=True):
-        default = False
-        pg = st.navigation([register_page])
-    if myLeftBt() or default:
-    # if right.button("login", icon="🔥", use_container_width=True):
+
+    if left.button("Nouvel utilisateur", icon="😃", use_container_width=True, key="new_user") or st.session_state.active_page == "user_page":
+        st.session_state.active_page = "user_page"
+        pg = st.navigation([user_page])
+
+    if right.button("login", icon="🔥", use_container_width=True, key="login") or st.session_state.active_page == "login_page":
         pg = st.navigation([login_page])
-
-
 
 pg.run()
 

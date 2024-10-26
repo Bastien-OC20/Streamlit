@@ -6,6 +6,8 @@ from Entity.User import User
 from Entity.Roles import Roles
 from DAL.Repository.UserRepositoryCSV import UserRepositoryCSV
 from services.Verifications import VerificationsService
+# from services.connectionService import ConnectService
+from Transiant import transiant_connection
 
 import re
 import keyboard
@@ -15,6 +17,7 @@ class UserService:
     
     __repoUserCSV = UserRepositoryCSV()
     __verificationService = VerificationsService()
+    # __connectService = ConnectService()
     
     # def __init__(self, UserRepositoryForCRUD: UserRepositoryForCRUD = UserRepositoryForCRUD(), VerificationsService: VerificationsService = VerificationsService()):
     #     self.__repoUserCSV = UserRepositoryForCRUD
@@ -28,9 +31,21 @@ class UserService:
         if user is None:
             print("Aucun utilisateur créé")
             return None
-            # repoUserCSV = UserRepositoryForCRUD()
+        
         user = self.__repoUserCSV.Create(user)
         return user
+    def CreateUserRoleUser(self, user:User) -> User:
+        """Creates a new user, fetches all users from the database and prints them
+        """
+        # user = User.ConstructUser("pat","1234","lol@lol.fr",13008,47,1.8,72,Roles.User)
+        if user is None:
+            print("Aucun utilisateur créé")
+            return None
+            # repoUserCSV = UserRepositoryForCRUD()
+        print("passe CreateUserRoleUser")
+        user = self.__repoUserCSV.Create(user)
+        return user
+    
     def CreateUserRoleAdmin(self) -> User:
         """Creates a new admin, fetches all users from the database and prints them
         """
@@ -75,9 +90,7 @@ class UserService:
 
     def __PrintActionsForRoleUser(self, user):
         regInputChoise = re.compile(r"([1-2]{1})")
-        # regEmptyString = re.compile(r"(^$)") # ^\s*$
-        # regEmptyString2 = re.compile(r"(\s*$)") # ^\s*$
-        # regWiteString = re.compile(r"(\s*)") # ^\s*$
+
         choice = 0
         while True:
             print("Vos informations de profil:")
@@ -92,7 +105,6 @@ class UserService:
             self.__pressSpaceOrEnter()
 
             if not re.fullmatch(regInputChoise, choice):
-            # if not re.fullmatch(regInputChoise, choice) or not re.fullmatch(regEmptyString) or not re.fullmatch(regWiteString) or not re.fullmatch(regEmptyString2):
                 print("Choix invalide. Veuillez réessayer.")
             else:
                 break
@@ -359,6 +371,21 @@ class UserService:
             else:
                 break
         return role
+    
+    @classmethod
+    def FindUserByEmail(cls, trs: transiant_connection) -> User:
+        print("User service - FindUserByEmail")
+        # print(cls.__verificationService.IsEmail(trs["email"]))
+        mail = trs
+        print("mail")
+        print(trs)
+        if cls.__verificationService.IsEmail(trs.email):
+            print("is email ok")
+            myUser = cls.__repoUserCSV.FindUserByEmail(trs.email)
+            print("fin OK FindUserByEmail")
+            return myUser
+        print("fin nok FindUserByEmail")
+        return None
 
     
     

@@ -22,10 +22,11 @@ class User:
     
     @classmethod
     def ConstructUser(cls, nom: str, mot_de_passe:str, email, code_postal: int, age:int, taille:float, poids:float, role:Roles):
+        print(mot_de_passe)
         user = cls()
         user.UserId = -1
         user.nom = nom
-        user.mot_de_passe = haschService.HashPassword(mot_de_passe)
+        user.mot_de_passe = haschService().HashPassord(mot_de_passe)
         user.email = email
         user.code_postal = code_postal
         user.age = age
@@ -110,7 +111,7 @@ class User:
     @classmethod
     def UserFromRowDf(cls, row : pd.DataFrame):
         instance = cls()
-        for key, value in row.iteritems():
+        for key, value in row.items():
             setattr(instance, key, value)
         return instance
     

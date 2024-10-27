@@ -12,7 +12,10 @@ from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 
 
 # Configuration de la page
-st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded")
+if "user_email" in st.session_state:
+    st.set_page_config(page_title=f"user : {st.session_state.user_email}", initial_sidebar_state="expanded")
+else:
+    st.set_page_config(page_title="Steamlit projet", initial_sidebar_state="expanded")
 # st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded", page_icon="📊")
 
 # Ajouter un logo
@@ -68,6 +71,9 @@ if st.session_state.logged_in:
     )
 
 else:
+    if "user_email" in st.session_state:
+        del st.session_state["user_email"]
+
     left, right = st.columns(2)
 
     if left.button("Nouvel utilisateur", icon="😃", use_container_width=True, key="new_user") or st.session_state.active_page == "user_page":

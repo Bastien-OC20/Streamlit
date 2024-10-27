@@ -27,15 +27,18 @@ class UserRepositoryCSV():
         # secondParentDirectory = str(secondParentDirectory).replace('\\', '/') 
         # self.__filePath = secondParentDirectory + self.__file
         # self.__header = self.__getHeaderDataFrameFromCSV()
-        print("Path CSV Data" + "="*80)
-        print(self.__filePath)
-        print("")
+        # print("Path CSV Data" + "="*80)
+        # print(self.__filePath)
+        # print("")
 
     def __getFileCSV(self) -> str:
         return self.__filePath
     
     def __getHeaderCSV(self):
         return self.__header
+    
+    def __setHeader(self):
+        self.__header = self.__getHeaderDataFrameFromCSV()
     
     def __getHeaderDataFrameFromCSV(self) -> pd.DataFrame: # READ
         try:
@@ -80,12 +83,12 @@ class UserRepositoryCSV():
             #  return None
             raise ValueError("Erreur dasn les paramètres")
         
-        df = self.FindAll()
-        print("data frame")
-        print(df)
-        if (df['email'].isin([user.email]).any()) or df['nom'].isin([user.nom]).any():
-            print("This user already exists, mail or name")
-            raise ValueError(f"C'est utilisateur exsite déjà soit : \"{user.email}\", ou soit : \"{user.nom}\" est déjà présent.")
+        # df = self.FindAll()
+        # print("data frame")
+        # print(df)
+        # if (df['email'].isin([user.email]).any()) or df['nom'].isin([user.nom]).any():
+        #     print("This user already exists, mail or name")
+        #     raise ValueError(f"C'est utilisateur exsite déjà soit : \"{user.email}\", ou soit : \"{user.nom}\" est déjà présent.")
         
         result = self.__addUserInCSV(user)
         return result
@@ -99,12 +102,13 @@ class UserRepositoryCSV():
         Returns:
             User: class User
         """
-        if not self.__userExists(user):
+        if not self.__userIdExists(user):
             return None
         
         oldUser = self.__setUserValuesFromCVSToUserClassInstance(user)
+
         userUpdated = self.__updateUser(oldUser, user)
-            
+
         return userUpdated
     
     
@@ -118,7 +122,7 @@ class UserRepositoryCSV():
             bool: true if user marked as deleted in the DeleteDate column
         """
         
-        if not self.__userExists(user):
+        if not self.__userIdExists(user):
             return None
         if not self.__deleteUser(user):
             return False
@@ -135,7 +139,7 @@ class UserRepositoryCSV():
             bool: true if user deleted
         """
         
-        if not self.__userExists(user):
+        if not self.__userIdExists(user):
             return None
         if not self.__removeUser(user):
             return False
@@ -186,10 +190,10 @@ class UserRepositoryCSV():
             result.email = newUser.email
             mofified = True
 
-        if oldUser.mot_de_passe != newUser.mot_de_passe:
-            selectedUserDf.at[oldUser.UserId,'mot_de_passe'] = newUser.mot_de_passe
-            result.mot_de_passe = newUser.mot_de_passe
-            mofified = True
+        # if oldUser.mot_de_passe != newUser.mot_de_passe:
+        #     selectedUserDf.at[oldUser.UserId,'mot_de_passe'] = newUser.mot_de_passe
+        #     result.mot_de_passe = newUser.mot_de_passe
+        #     mofified = True
             
         if oldUser.role!= newUser.role:
             selectedUserDf.at[oldUser.UserId,'role'] = newUser.role
@@ -223,6 +227,7 @@ class UserRepositoryCSV():
             newUser.CreatedDate = oldUser.CreatedDate
             newUser.set_UpdatedDate()
             try:
+                self.__setHeader()
                 df.drop(index=[indexOldUser], inplace = True)
                 newUserDf = pd.DataFrame(newUser.__dict__ , index=[0])
                 df = pd.concat([df, newUserDf],ignore_index=True)
@@ -274,7 +279,9 @@ class UserRepositoryCSV():
             _value_: User values from dataframe
         """
         df = self.FindAll()
-        indexOldUser = df.index.get_loc(df[df["nom"]==user.nom].index[0])
+        indexOldUser = df.index.get_loc(df[df["UserId"]==user.UserId].index[0])
+        # indexOldUser = df.index.get_loc(df[df["nom"]==user.nom].index[0])
+        
         userId = df['UserId'].loc[df.index[indexOldUser]]
         print(f"iduser = {userId}")
         nom = df['nom'].loc[df.index[indexOldUser]]
@@ -293,7 +300,7 @@ class UserRepositoryCSV():
         return result
 
     
-    def __userExists(self, user: User)-> bool:
+    def __userIdExists(self, user: User)-> bool:
         """Does the user exist
 
         Args:
@@ -306,31 +313,51 @@ class UserRepositoryCSV():
             print("This user is not an instance of User")
             return False
         df = self.FindAll()
-        if not df['nom'].isin([user.nom]).any():
+        if not df['UserId'].isin([user.UserId]).any():
+        # if not df['nom'].isin([user.nom]).any():
             print("This user doesn't exist")
             return False
         return True
     
     def FindUserByName(self, name: str) -> pd.DataFrame:
+        df = self.FindAll()
         try:
-            df = self.FindAll()
             indexUser = df.index.get_loc(df[df["nom"]==name].index[0])
             return df.loc[df.index[indexUser]]
         except IndexError:
             return None
     
     def FindDfUserByEmail(self, email: str) -> pd.DataFrame:
+        df = self.FindAll()
         try:
-            df = self.FindAll()
             indexUser = df.index.get_loc(df[df["email"]==email].index[0])
             return df.loc[df.index[indexUser]]
         except IndexError:
             return None
     
     def FindUserByEmail(self, email: str) -> User:
+        df = self.FindAll()
         try:
-            df = self.FindAll()
             indexUser = df.index.get_loc(df[df["email"]==email].index[0])
+            df_user = df.loc[df.index[indexUser]]
+            myuser = User.UserFromRowDf(df_user)
+            # return df.loc[df.index[indexUser]]
+            return myuser
+        except IndexError:
+            return None
+    
+    def FindDfUserById(self, id: str) -> pd.DataFrame:
+        df = self.FindAll()
+        try:
+            indexUser = df.index.get_loc(df[df["UserId"]==id].index[0])
+            return df.loc[df.index[indexUser]]
+        except IndexError:
+            return None
+    
+    def FindUserById(self, id: str) -> User:
+        df = self.FindAll()
+        try:
+            indexUser = df.index.get_loc(df[df["UserId"]==id].index[0])
             df_user = df.loc[df.index[indexUser]]
             myuser = User.UserFromRowDf(df_user)
             # return df.loc[df.index[indexUser]]

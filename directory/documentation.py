@@ -1,6 +1,8 @@
 import streamlit as st
 
 def show_documentation():
+    st.session_state.active_page = "documentation_page"
+
     with st.sidebar:
         st.header("Menu")
         st.button("Bouton d'exemple")

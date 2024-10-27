@@ -46,6 +46,7 @@ import logging
 
 # Fonction principale pour gérer la création du graphique de la fonction affine
 def show_fonctionAffine():
+    st.session_state.active_page = "fonctionAffine_page"
 
     # st.set_page_config(initial_sidebar_state="expanded", page_icon="🧮")
 

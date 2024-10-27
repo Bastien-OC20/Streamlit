@@ -19,7 +19,7 @@ class haschService():
                 # Best practice to check – and if necessary rehash – passwords after each successful authentication.
                 # https://argon2-cffi.readthedocs.io/en/stable/api.html#argon2.PasswordHasher.check_needs_rehash
                 self.__ph.check_needs_rehash(hash) 
-                print("checkPassorwd OK")
+                # print("checkPassorwd OK")
                 return True
         except Exception as e:
             print(f"checkPassorw => An error occurred: {e}")

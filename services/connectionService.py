@@ -24,14 +24,22 @@ class ConnectService:
     #     return True
 
     def __checkPassword(self, trs:transiant_connection, user:User)->bool:
+        # print("enter __checkPassword")
+        # print(trs.password)
+        # print(user.mot_de_passe)
         if not self.__myHaschService.checkPassorwd(trs, user.mot_de_passe):
+            # print("__checkPassword NOK")
             return False
+        # print("connectionService __checkPassword OK")
         return True
 
-    def verifyConnect(self, trs:transiant_connection)->bool:
-        user_from_trs = self.__myUserService.FindUserByEmail(trs)
-        if user_from_trs is None:
-            return False
-        if not self.__checkPassword(trs, user_from_trs):
-            return False
-        return True
+    def verifyConnect(self, trs:transiant_connection)->User:
+        # print(trs)
+        user = self.__myUserService.FindUserByEmail(trs)
+        # print(user.__dict__)
+
+        if user is None:
+            return None
+        if not self.__checkPassword(trs, user):
+            return None
+        return user

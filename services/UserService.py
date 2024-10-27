@@ -8,6 +8,7 @@ from DAL.Repository.UserRepositoryCSV import UserRepositoryCSV
 from services.Verifications import VerificationsService
 # from services.connectionService import ConnectService
 from Transiant import transiant_connection
+from Transiant.UserConnected import UserConnected
 
 import re
 import keyboard
@@ -23,6 +24,61 @@ class UserService:
     #     self.__repoUserCSV = UserRepositoryForCRUD
     #     self.__verificationService = VerificationsService()
     
+#####################################################################################  méthodes utilisée
+    def CreateUserRoleUser(self, user:User) -> User:
+        """Creates a new user, fetches all users from the database and prints them
+        """
+        # user = User.ConstructUser("pat","1234","lol@lol.fr",13008,47,1.8,72,Roles.User)
+        if user is None:
+            print("Aucun utilisateur créé")
+            return None
+
+        if self.__isEmailExiste(user.email):
+            raise ValueError(f"Un utilisateur avec ce courriel : \"{user.email}\" existe déjà présent.")
+        if self.__isNameExiste(user.nom):
+            raise ValueError(f"Un utilisateur avec ce nom : \"{user.nom}\" existe déjà présent.")
+
+            # repoUserCSV = UserRepositoryForCRUD()
+        # print("passe CreateUserRoleUser")
+        user = self.__repoUserCSV.Create(user)
+        return user
+
+    def UpdateUserRoleUser(self, userModified:User, userConnected:UserConnected ) -> User:
+        if user is None:
+            print("Aucun utilisateur mis-à-jour")
+            return None
+        print("UserService- UpdateUserRoleUser 01" )
+        
+
+        user = self.__repoUserCSV.Update(user)
+        return user
+    
+    @classmethod
+    def FindUserByEmail(cls, trs: transiant_connection) -> User:
+        mail = trs
+        if cls.__verificationService.IsEmail(trs.email):
+            myUser = cls.__repoUserCSV.FindUserByEmail(trs.email)
+            return myUser
+        return None
+
+    @classmethod
+    def __isEmailExiste(cls, email:str):
+        df = cls.__repoUserCSV.FindAll()
+        if not df['email'].isin([email]).any():
+            return False
+        print("This email exists")
+        return True
+    
+    @classmethod
+    def __isNameExiste(cls, name:str):
+        df = cls.__repoUserCSV.FindAll()
+        if not df['nom'].isin([name]).any():
+            return False
+        print("This name exists")
+        return True
+    
+#####################################################################################
+
     def CreateUserRoleUser(self) -> User:
         """Creates a new user, fetches all users from the database and prints them
         """
@@ -34,17 +90,7 @@ class UserService:
         
         user = self.__repoUserCSV.Create(user)
         return user
-    def CreateUserRoleUser(self, user:User) -> User:
-        """Creates a new user, fetches all users from the database and prints them
-        """
-        # user = User.ConstructUser("pat","1234","lol@lol.fr",13008,47,1.8,72,Roles.User)
-        if user is None:
-            print("Aucun utilisateur créé")
-            return None
-            # repoUserCSV = UserRepositoryForCRUD()
-        print("passe CreateUserRoleUser")
-        user = self.__repoUserCSV.Create(user)
-        return user
+
     
     def CreateUserRoleAdmin(self) -> User:
         """Creates a new admin, fetches all users from the database and prints them
@@ -281,7 +327,7 @@ class UserService:
         try:
             return User.ConstructUser(name,password,email,postalCode,age,size,weight,Roles.User)
         except Exception as e:
-            print(f"create admin => An error occurred: {e}")
+            print(f"create user => An error occurred: {e}")
             return None
 
     def __askUserProperties(self):
@@ -372,13 +418,6 @@ class UserService:
                 break
         return role
     
-    @classmethod
-    def FindUserByEmail(cls, trs: transiant_connection) -> User:
-        mail = trs
-        if cls.__verificationService.IsEmail(trs.email):
-            myUser = cls.__repoUserCSV.FindUserByEmail(trs.email)
-            return myUser
-        return None
 
     
     

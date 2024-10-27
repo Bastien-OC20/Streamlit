@@ -1,9 +1,11 @@
+import streamlit as st
 from services.haschService import haschService
 from datetime import datetime
 from Entity.Roles import Roles
 import pandas as pd
+from Transiant.Personne import Personne
 
-class User:
+class User(Personne):
     UserId = None
     nom = None
     mot_de_passe = None
@@ -21,7 +23,7 @@ class User:
         pass
     
     @classmethod
-    def ConstructUser(cls, nom: str, mot_de_passe:str, email, code_postal: int, age:int, taille:float, poids:float, role:Roles):
+    def ConstructUser(cls, nom: str, mot_de_passe:str, email, code_postal: int, age:int, taille:float, poids:int, role:Roles):
         print(mot_de_passe)
         user = cls()
         user.UserId = -1
@@ -36,7 +38,7 @@ class User:
         return user
 
     @classmethod
-    def ConstructUserAllAttributsFrormDf(cls, userId: str,nom: str, mot_de_passe:str, email, code_postal: int, age:int, taille:float, poids:float, role:Roles, CreatedDate:datetime.timestamp, UpdatedDate:datetime.timestamp, DeletedDate:datetime.timestamp):
+    def ConstructUserAllAttributsFrormDf(cls, userId: str,nom: str, mot_de_passe:str, email, code_postal: int, age:int, taille:float, poids:int, role:Roles, CreatedDate:datetime.timestamp, UpdatedDate:datetime.timestamp, DeletedDate:datetime.timestamp):
         """_summary_
             construct User with all attributes from dataframe
             No password encryption, it's already encrypted in dataframe
@@ -57,6 +59,27 @@ class User:
         user.DeletedDate = DeletedDate
         return user
     
+    @classmethod
+    def ConstructUserSimple(cls, userId: str,nom: str, mot_de_passe:str, email:str, code_postal: int, age:int, taille:float, poids:int, role:Roles):
+        """_summary_
+            construct User with all attributes from dataframe
+            No password encryption, it's already encrypted in dataframe
+            Juste values frome dataframe
+        """
+        print("init construct user  simple")
+        user = cls()
+        user.UserId = userId
+        user.nom = nom
+        user.mot_de_passe = mot_de_passe
+        user.email = email
+        user.code_postal = code_postal
+        user.age = age
+        user.taille = taille
+        user.poids = poids
+        user.role = role 
+        print("fin istanciation user simple")
+        return user
+    
     def set_CreatedDate(self):
         self.CreatedDate = datetime.timestamp(datetime.now())
         
@@ -67,12 +90,28 @@ class User:
         self.DeletedDate = datetime.timestamp(datetime.now())
   
     def afficher_infos(self):
-        print(f"Nom: {self.__nom}")
-        print(f"Email: {self.__email}")
-        print(f"Code postal: {self.__code_postal}")
-        print(f"Âge: {self.__age} ans")
-        print(f"Taille: {self.__taille} m")
-        print(f"Poids: {self.__poids} kg")
+        print(f"Nom: {self.nom}")
+        print(f"Email: {self.email}")
+        print(f"Code postal: {self.code_postal}")
+        print(f"Âge: {self.age} ans")
+        print(f"Taille: {self.taille} m")
+        print(f"Poids: {self.poids} kg")
+    
+    def afficher_infos_str(self) -> str:
+        return (f"""
+                    * Nom: {self.nom}
+                    * Email: {self.email}
+                    * Code postal: {self.code_postal}
+                    * Âge: {self.age} ans
+                    * Taille: {self.taille} m
+                    * Poids: {self.poids} kg
+                    """)
+        print(f"Nom: {self.nom}")
+        print(f"Email: {self.email}")
+        print(f"Code postal: {self.code_postal}")
+        print(f"Âge: {self.age} ans")
+        print(f"Taille: {self.taille} m")
+        print(f"Poids: {self.poids} kg")
     
     def calculer_imc(self):
         # IMC = poids / (taille^2)

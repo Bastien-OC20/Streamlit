@@ -53,7 +53,7 @@ class User(Personne):
         user.age = age
         user.taille = taille
         user.poids = poids
-        user.role = role #
+        user.role = role.value #
         user.CreatedDate = CreatedDate
         user.UpdatedDate = UpdatedDate
         user.DeletedDate = DeletedDate
@@ -66,7 +66,6 @@ class User(Personne):
             No password encryption, it's already encrypted in dataframe
             Juste values frome dataframe
         """
-        print("init construct user  simple")
         user = cls()
         user.UserId = userId
         user.nom = nom
@@ -76,8 +75,7 @@ class User(Personne):
         user.age = age
         user.taille = taille
         user.poids = poids
-        user.role = role 
-        print("fin istanciation user simple")
+        user.role = role.value 
         return user
     
     def set_CreatedDate(self):
@@ -106,16 +104,10 @@ class User(Personne):
                     * Taille: {self.taille} m
                     * Poids: {self.poids} kg
                     """)
-        print(f"Nom: {self.nom}")
-        print(f"Email: {self.email}")
-        print(f"Code postal: {self.code_postal}")
-        print(f"Âge: {self.age} ans")
-        print(f"Taille: {self.taille} m")
-        print(f"Poids: {self.poids} kg")
     
     def calculer_imc(self):
         # IMC = poids / (taille^2)
-        imc = self.__poids / (self.__taille ** 2)
+        imc = self.poids / (self.taille ** 2)
         return round(imc, 2)
     
 
@@ -130,6 +122,14 @@ class User(Personne):
         return f"User({self.UserId},\n {self.nom},\n{self.mot_de_passe},\n {self.email},\n {self.code_postal},\n {self.age},\n {self.taille},\n {self.poids},\n {self.role})"
 
     def __eq__(self, user: object) -> bool:
+        """"
+        Args:
+            user (User): user class instance
+
+        Returns:
+            bool: true if they are equals, except password
+        
+        """
         if not isinstance(user, User):
             return False
         if (self.nom == user.nom) and (self.email == user.email) and (self.code_postal == user.code_postal) and (self.age == user.age) and (self.taille == user.taille) and (self.poids==user.poids):

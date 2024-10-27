@@ -1,9 +1,7 @@
 UserId,nom,mot_de_passe,email,code_postal,age,taille,poids,role,CreatedDate,UpdatedDate,DeletedDate
 bba972eb-9890-4884-bad8-85b84261368e,Alexis,scrypt:32768:8:1$GTq0rNtVupyl3GOS$56a0ecf19aae9108f0eebc5b631ffe1ef70fc4d35d74530dc8e35b1977cb7d2cec151b4a9b1db41bcb0e833f41580d2a5850282fb09a4cee721a4c5c5327d69c,Alexis@gmail.com,13008,25,1.8,72.0,0,1727638851.7521,,
 1412afd3-95fc-4eed-8e37-73a07c812a54,Jean,scrypt:32768:8:1$uSed4uMdc2coC67y$57c68e8a39f8729de676729a398272fb0d33e26545fb1e831d88bfb766335583bf0b208f202b0af280338c332772bae04635f8ab42a59b4470b2ec8a108510b9,jeanNewMail@gmail.com,13201,25,1.8,72.0,2,1727820843.861478,1727820853.595488,
-6622114d-4057-41ab-9725-5dda1a9e9173,kiki,"$argon2id$v=19$m=65536,t=3,p=4$6jMqAxJ4KCVp2/bzxOxskA$l21ERHAXeLqmB0htMYer/cVUplMDy7+x8BjntacNnm8",kiki@free.fr,13880,43,1.8,100.0,2,1729868399.825145,,
-c1be45ad-a656-48b1-9d21-520a4bee97f7,théo,"$argon2id$v=19$m=65536,t=3,p=4$1MV8HQBS6CGxmOyt85rjgQ$o6gEgaw4vnM7wdAmvPcDpCaWAvEYtCZF0gYX8JTRR08",abc@free.fr,13009,34,1.84,85.0,2,1729883284.072814,,
 f5744c81-a496-4ade-a3e7-23348690405b,mario,"$argon2id$v=19$m=65536,t=3,p=4$qI6ZX1wkmBvpK3bITqdcMg$qaEDrhKurA5i1qXKkrVrzOmNYl0AzOD6HicgD7WKzX4",azerty@free.fr,13010,34,1.54,67.0,2,1729883471.53396,,
 85ff9b81-d343-4d60-8b12-2f9a446856f9,jade,"$argon2id$v=19$m=65536,t=3,p=4$hp7/5hjUrl102B4RBGOekA$SR9Jax9QLi6hGSYf7vbfeY23jZ5Z+MvdLjvkUYOTfL0",azerty1@free.fr,13009,45,1.6,45.0,2,1729883980.012068,,
 5f3e55f4-f5d5-46e3-84bf-0b985b279504,marie,"$argon2id$v=19$m=65536,t=3,p=4$x3VzJDq63LECLK8Y6jeCqA$RZmzW2nfdPSHdMAQi7wheOOOxGh5ctva5IXn+J+JavA",azerty2@free.fr,13009,45,1.6,45.0,2,1729884100.638201,,
-1255442f-86be-42cb-bc9b-f17dca884c55,amendine,"$argon2id$v=19$m=65536,t=3,p=4$OI8flmUC8Fw9EWTjfLAn5w$XldsRCRSnxxNDqitsoNUagN/CMtHCr/gcPBv29CH78Q",aqw@free.fr,12100,25,1.63,46.0,2,1729966543.465513,,
+c1be45ad-a656-48b1-9d21-520a4bee97f7,théoMUT,"$argon2id$v=19$m=65536,t=3,p=4$1MV8HQBS6CGxmOyt85rjgQ$o6gEgaw4vnM7wdAmvPcDpCaWAvEYtCZF0gYX8JTRR08",abc@free.fr,13009,34,1.84,85.0,2,1729883284.072814,1730058997.965865,

@@ -29,7 +29,10 @@ def show_login():
                 reason="Connexion impossible"
                 msg = "Vos identifiants ne sont pas reconnus"
                 # DialogError("Connexion impossible")
-                DialogBox.DLgInfoMessage(reason,msg)
+                # DialogBox.DLgInfoMessage(reason,msg)
+                dg = DialogBox()
+                dg.DLgInfoMessage(reason,msg)
+                del dg
                 return
             # myUserConnected = UserConnected(user.email,user.UserId, user.nom)
             # print(myUserConnected.__dir__)
@@ -48,6 +51,9 @@ def show_login():
         except Exception as e:
             reason = "Erreur de connexion !"
             st.write("erreur de connexion !")
-            DialogBox.DLgInfo(reason)
+            # DialogBox.DLgInfo(reason)
+            dg = DialogBox()
+            dg.DLgInfo(reason)
+            del dg
 
 show_login()

@@ -44,13 +44,32 @@ class UserService:
         return user
 
     def UpdateUserRoleUser(self, userModified:User, userConnected:UserConnected ) -> User:
-        if user is None:
+
+        if userModified is None or userConnected is None:
             print("Aucun utilisateur mis-à-jour")
             return None
-        print("UserService- UpdateUserRoleUser 01" )
-        
 
-        user = self.__repoUserCSV.Update(user)
+        nbEmail = self.__CountEmail(userModified.email)
+        if nbEmail > 0:
+            if userModified.email != userConnected.email:
+                raise ValueError(f"Un utilisateur avec ce courriel : \"{userModified.email}\" existe déjà présent.")
+
+        # print("*"*80)
+        # print(nbEmail)
+        # print(userModified.nom != userConnected.name)
+        # print("userModified.nom = " + userModified.nom)
+        # print("userConnected.name = " + userConnected.name)
+        # print("*"*80)
+        nbEname = self.__CountName(userModified.nom)
+
+        if nbEname > 0:
+            if userModified.nom != userConnected.name:
+                raise ValueError(f"Un utilisateur avec ce nom : \"{user.nom}\" existe déjà présent.")
+
+        user = self.__repoUserCSV.FindUserById(userConnected.UserId)
+        userModified.mot_de_passe = user.mot_de_passe     
+        user = self.__repoUserCSV.Update(userModified)
+
         return user
     
     @classmethod
@@ -70,6 +89,12 @@ class UserService:
         return True
     
     @classmethod
+    def __CountEmail(cls, email:str):
+        df = cls.__repoUserCSV.FindAll()
+        result = len(df[df["email"]==email])
+        return result
+    
+    @classmethod
     def __isNameExiste(cls, name:str):
         df = cls.__repoUserCSV.FindAll()
         if not df['nom'].isin([name]).any():
@@ -77,6 +102,10 @@ class UserService:
         print("This name exists")
         return True
     
+    @classmethod
+    def __CountName(cls, name:str):
+        df = cls.__repoUserCSV.FindAll()
+        return len(df[df["nom"]==name])
 #####################################################################################
 
     def CreateUserRoleUser(self) -> User:

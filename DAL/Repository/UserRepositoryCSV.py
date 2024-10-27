@@ -4,6 +4,7 @@ from Entity.User import User
 import os
 import uuid
 from pathlib import Path
+from Entity.Roles import Roles
 
 # ,UserId,Name,Password,Email,Role,Age,Taille,Poids,Postal,CreatedDate,UpdatedDate,DeletedDate
 # 0,0,Anthony,scrypt:32768:8:1$vdpjk472agafbAtC$225570d1468228415be6ca78545438be0dc17beded109deb2ed7b0f4a8d53735df7deafa9b58b54a0e79266075f1a72bcf18df6672d9589be742bd3cdb2d86e1,admin@test.com," ""ROLE_SUPERADMIN""",25,220,110,13009
@@ -105,10 +106,13 @@ class UserRepositoryCSV():
         if not self.__userIdExists(user):
             return None
         
+        print("REPO - Update 01")
         oldUser = self.__setUserValuesFromCVSToUserClassInstance(user)
 
+        print("REPO - Update 02")
         userUpdated = self.__updateUser(oldUser, user)
 
+        print("REPO - Update 03")
         return userUpdated
     
     
@@ -173,13 +177,15 @@ class UserRepositoryCSV():
         Private fonction 
         Update optimist user in CSV File
         """
+        print("REPO - __updateUser 01")
         newUser.UserId = oldUser.UserId
         
         df = self.FindAll()
         selectedUserDf = df.loc[df['nom'] == oldUser.nom]
-        result=User.ConstructUserAllAttributsFrormDf(oldUser.UserId, oldUser.nom, oldUser.mot_de_passe, oldUser.email, oldUser.code_postal, oldUser.age, oldUser.taille, oldUser.poids, oldUser.role, oldUser.UpdatedDate, oldUser.email, oldUser.code_postal)
+        result=User.ConstructUserAllAttributsFrormDf(oldUser.UserId, oldUser.nom, oldUser.mot_de_passe, oldUser.email, oldUser.code_postal, oldUser.age, oldUser.taille, oldUser.poids, Roles(oldUser.role), oldUser.UpdatedDate, oldUser.email, oldUser.code_postal)
         indexOldUser = df.index.get_loc(df[df["nom"]==oldUser.nom].index[0])
         mofified = False
+        print("REPO - __updateUser 02")
         if newUser.UserId != oldUser.UserId:
             if df['email'].isin([newUser.email]).any():
                 print(f"l'email modifier {newUser.email} pour l'utilisateur {oldUser.nom} est déjà utilisé, veuillez en rentrer un autre")
@@ -196,7 +202,7 @@ class UserRepositoryCSV():
         #     mofified = True
             
         if oldUser.role!= newUser.role:
-            selectedUserDf.at[oldUser.UserId,'role'] = newUser.role
+            selectedUserDf.at[oldUser.UserId,'role'] = newUser.role.value
             result.role = newUser.role
             mofified = True
 
@@ -223,21 +229,29 @@ class UserRepositoryCSV():
         if not mofified:
             print("No modification detected.")
             return None
-        else:
-            newUser.CreatedDate = oldUser.CreatedDate
-            newUser.set_UpdatedDate()
-            try:
-                self.__setHeader()
-                df.drop(index=[indexOldUser], inplace = True)
-                newUserDf = pd.DataFrame(newUser.__dict__ , index=[0])
-                df = pd.concat([df, newUserDf],ignore_index=True)
-                self.__getHeaderCSV().to_csv(self.__getFileCSV(), index=False)
-                df.to_csv(self.__getFileCSV(), mode='a', index=False, header=False)
-                print(f"Data updated successfully in '{self.__getFileCSV()}'.")
-                return result
-            except Exception as e:
-                print(f"UpdateUser => An error occurred: {e}")
-            return None
+        
+        print("REPO - __updateUser 03")
+
+        newUser.CreatedDate = oldUser.CreatedDate
+        print("REPO - __updateUser 03-1")
+        newUser.set_UpdatedDate()
+        newUser.poids = round(newUser.poids, 0)
+        print("REPO - __updateUser 03-2")
+        print("user to update ")
+        print(newUser)
+        try:
+            print("REPO - __updateUser 04")
+            self.__setHeader()
+            df.drop(index=[indexOldUser], inplace = True)
+            newUserDf = pd.DataFrame(newUser.__dict__ , index=[0])
+            df = pd.concat([df, newUserDf],ignore_index=True)
+            self.__getHeaderCSV().to_csv(self.__getFileCSV(), index=False)
+            df.to_csv(self.__getFileCSV(), mode='a', index=False, header=False)
+            print(f"Data updated successfully in '{self.__getFileCSV()}'.")
+            return result
+        except Exception as e:
+            print(f"UpdateUser => An error occurred: {e}")
+        return None
        
     
     def __deleteUser(self, user: User) -> bool: # TODO pas finie
@@ -280,10 +294,8 @@ class UserRepositoryCSV():
         """
         df = self.FindAll()
         indexOldUser = df.index.get_loc(df[df["UserId"]==user.UserId].index[0])
-        # indexOldUser = df.index.get_loc(df[df["nom"]==user.nom].index[0])
         
         userId = df['UserId'].loc[df.index[indexOldUser]]
-        print(f"iduser = {userId}")
         nom = df['nom'].loc[df.index[indexOldUser]]
         mot_de_passe = df['mot_de_passe'].loc[df.index[indexOldUser]]
         email = df['email'].loc[df.index[indexOldUser]]
@@ -296,7 +308,7 @@ class UserRepositoryCSV():
         UpdatedDate = df['UpdatedDate'].loc[df.index[indexOldUser]]
         DeletedDate = df['DeletedDate'].loc[df.index[indexOldUser]]
             
-        result = User.ConstructUserAllAttributsFrormDf(userId, nom,mot_de_passe,email,code_postal,age,taille,poids, role, CreatedDate, UpdatedDate, DeletedDate)
+        result = User.ConstructUserAllAttributsFrormDf(userId, nom,mot_de_passe,email,code_postal,age,taille,poids, Roles(role), CreatedDate, UpdatedDate, DeletedDate)
         return result
 
     

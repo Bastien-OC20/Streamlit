@@ -11,11 +11,11 @@ class UserConnected(Personne):
     def __init__(self,UserId:str, name:str, email:str):
         self.UserId = UserId
         self.name = name
-        super().__init__(cls, email)
+        super().__init__(email)
             
     def __new__(cls, UserId, name, email):
         if not cls.__instance:
-            print("creating instance")
+            # print("creating instance")
             
             # cls.email = email
             cls.__instance = super(UserConnected, cls).__new__(cls)

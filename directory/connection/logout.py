@@ -8,9 +8,12 @@ def show_logout():
 
    if st.button("Log out"):
       reason = "Vous allé être déconnecté"
-      DialogBox.DLgInfo(reason)
+      # DialogBox.DLgInfo(reason)
+      dg = DialogBox()
+      dg.LgInfo(reason)
+      del dg
       st.session_state.logged_in = False
-      
+
       if "user_UserId" in st.session_state:
          del st.session_state.user_UserId
 

@@ -20,9 +20,14 @@ def show_user():
     __verificationService = VerificationsService()
     __userService = UserService()
 
+    st.write(f"nom : {st.session_state.user_name}")
+    st.write(f"email : {st.session_state.user_email}")
+    st.write(f"id : {st.session_state.user_id}")
+    st.write(f"role : {st.session_state.user_role}")
+    
     def checkData(email,name, postalCode, age, size, weight)->str:
         textError = ""
-        checkOK = True
+        # checkOK = True
         if not __verificationService.IsEmail(email):
             checkOK = False
             st.write("* Veuillez saisir un courriel valide.")
@@ -47,8 +52,8 @@ def show_user():
             checkOK = False
             st.write("* Veuillez saisir une poids valide de type: 64, 42, 135")
             textError = f"{textError}\n* Veuillez saisir une poids valide de type: 64, 42, 135"
-        if checkOK:
-            return None
+        # if not checkOK:
+        #     return None
         return textError
 
     # print("st.session_state.modif_user")
@@ -79,34 +84,49 @@ def show_user():
         resultCheck = checkData(email,name, postalCode, age, size, weight)
         userCreated = None
         if  st.button("enregistrer"):
-            if isinstance(resultCheck, str):
+            if resultCheck != "":
                 reason="Erreurs dans les données rentrées"
-                DialogBox.DLgInfoMessage(reason, resultCheck)
+                dg = DialogBox()
+                dg.DLgInfoMessage(reason, resultCheck)
+                del dg
+
+                # DialogBox.DLgInfoMessage(reason, resultCheck)
                 return
             try:
-                myUser = User.ConstructUser(name,password,email,postalCode,age,size,weight,Roles.User.value)
+                myUser = User.ConstructUser(name,password,email,postalCode,age,size,weight,Roles.User)
                 
                 userCreated = __userService.CreateUserRoleUser(myUser)
 
             except ValueError as e:
                 reason="Erreur d'enregistrement"
-                DialogBox.DLgInfoMessage(reason, e)
+                # DialogBox.DLgInfoMessage(reason, e)
+                dg = DialogBox()
+                dg.DLgInfoMessage(reason, e)
+                del dg
             
             except Exception:
                 reason="Erreur inattendue"
-                DialogBox.DLgErreur(reason)
+                dg = DialogBox()
+                dg.DLgErreur(reason)
+                del dg
 
             else: # permet de réaliser la suite du code après le try qui c'est bien passé
                 if userCreated is None:
                     reason="Erreur dans la création de l'utilisateur"
-                    DialogBox.DLgErreur(reason)
+                    dg = DialogBox()
+                    dg.DLgErreur(reason)
+                    del dg
                     return
                 reason=f"Enregistrement réussi de l'utilisateur {name}"
-                DialogBox.DLgInfoMessage(reason,userCreated.afficher_infos_str())
+                # DialogBox.DLgInfoMessage(reason,userCreated.afficher_infos_str())
+                dg = DialogBox()
+                dg.DLgInfoMessage(reason,userCreated.afficher_infos_str())
+                del dg
                 st.session_state.logged_in = True
 
     else:
         with profilVue:
+
             state = st.session_state.modif_user
 
             st.header("Profil utilisateur") 
@@ -155,63 +175,72 @@ def show_user():
                     if st.button("Valider"):
                         resultCheck = checkData(new_email,new_nom, new_postalcode, new_age, new_size, new_weight)
                         userModifed = None
-                        if isinstance(resultCheck, str):
+                        if resultCheck != "":
                             reason="Erreurs dans les données de création de l'utilisateur"
-                            DialogBox.DLgInfoMessage(reason, resultCheck)
+                            # DialogBox.DLgInfoMessage(reason, resultCheck)
+                            dg = DialogBox()
+                            dg.DLgInfoMessage(reason, resultCheck)
+                            del dg
                             return
-                        
+
                         try:
-                            userModified = User.ConstructUserSimple(st.session_state.user_id,
-                                                             new_nom,
-                                                             "",
-                                                             new_email,
-                                                             int(new_postalcode),
-                                                             int(new_age),
-                                                             float(new_size),
-                                                             int(new_weight),
-                                                             Roles(st.session_state.user_role))
-                            userConnected = UserConnected(st.session_state.user_id, st.session_state.user_name, st.session_state.user_email)
-                            userModifed = __userService.UpdateUserRoleUser(userModified, userConnected)
+                            userModifed = User.ConstructUserSimple(
+                                st.session_state.user_id,
+                                new_nom,
+                                None,
+                                new_email,
+                                int(new_postalcode),
+                                int(new_age),
+                                float(new_size),
+                                int(new_weight),
+                                Roles(st.session_state.user_role))
                             
+                            userConnected = UserConnected(
+                                st.session_state.user_id, 
+                                st.session_state.user_name, 
+                                st.session_state.user_email)
+                            
+                            print("suer - update 01")
+                            result = __userService.UpdateUserRoleUser(userModifed, userConnected)
+                            if result is None:
+                                reason=f"Aucune action"
+                                msg="Aucune Modification de l'utilisateur courrant constaté"
+                                dg = DialogBox()
+                                dg.DLgInfoMessage(reason,msg)
+                                del dg
+
+                            st.session_state.logged_in = True
+                            st.session_state.user_name = result.nom
+                            st.session_state.user_email = result.email
+                            print("suer - update 02")
 
                         except ValueError as e: 
                             reason="Erreur lors de la mise-à-jour"
-                            DialogBox.DLgInfoMessage(reason, e)
+                            # DialogBox.DLgInfoMessage(reason, e)
+                            dg = DialogBox()
+                            dg.DLgInfoMessage(reason, e)
+                            del dg
                         
                         except Exception:
                             reason="Erreur inattendue"
-                            DialogBox.DLgErreur(reason)
+                            dg = DialogBox()
+                            dg.DLgErreur(reason)
+                            del dg
 
                         else: # permet de réaliser la suite du code après le try qui c'est bien passé
-                            if userModifed is None:
+                            if result is None:
                                 reason="Erreur dans la mise-à-jour de l'utilisateur"
-                                DialogBox.DLgErreur(reason)
+                                dg = DialogBox()
+                                dg.DLgErreur(reason)
+                                del dg
+
                                 return
-                            reason=f"Modification de l'utilisateur \"{userModifed.nom}\" réussie"
-                            DialogBox.DLgInfoMessage(reason,userModifed.afficher_infos_str())
+                            reason=f"Modification de l'utilisateur \"{result.nom}\" réussie"
+                            # DialogBox.DLgInfoMessage(reason,result.afficher_infos_str())
+                            dg = DialogBox()
+                            dg.DLgInfoMessage(reason,result.afficher_infos_str())
+                            del dg
                             st.session_state.logged_in = True
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        # # myTransiantUser = transiant_user()
-                        # if __verificationService.IsName(name):
-                        #     # myTransiantUser.nom = name
-                        #     pass #TODO modif bdd
 
         with membres:
             if "modif_user" not in st.session_state:

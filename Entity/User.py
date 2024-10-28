@@ -96,12 +96,14 @@ class User(Personne):
         print(f"Poids: {self.poids} kg")
     
     def afficher_infos_str(self) -> str:
+        # self.afficher_infos()
         return (f"""
                     * Nom: {self.nom}
                     * Email: {self.email}
                     * Code postal: {self.code_postal}
                     * Âge: {self.age} ans
                     * Taille: {self.taille} m
+                    Problème
                     * Poids: {self.poids} kg
                     """)
     

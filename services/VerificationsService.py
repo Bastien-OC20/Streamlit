@@ -6,7 +6,36 @@ from Entity import Roles
 
 @dataclass
 class VerificationsService:
+
+    def checkAllData(self, email,name, postalCode, age, size, weight)->str:
+        textError = ""
+        if not self.IsEmail(email):
+            textError = f"{textError}\n* Veuillez saisir un courriel valide." 
+
+        if not self.IsName(name):
+            textError = f"{textError}\n* Veuillez saisir un nom valide."
+        
+        textError = self.checkSimpleData(postalCode, age, size, weight)
+
+        return textError
     
+    def checkSimpleData(self, postalCode, age, size, weight)->str:
+        textError = ""
+ 
+        if not self.IsCodePostal(postalCode):
+            textError = f"{textError}\n* Veuillez saisir un code postal valide."
+
+        if not self.IsAge(age):
+            textError = f"{textError}\n* Veuillez saisir un age valide."
+
+        if not self.IsSize(size):
+            textError = f"{textError}\n* Veuillez saisir une taille valide de type: 1.5, 2, 1.88"
+
+        if not self.IsWeight(weight):
+            textError = f"{textError}\n* Veuillez saisir une poids valide de type: 64, 42, 135"
+            
+        return textError
+
     def IsCodePostal(self,Postal):
         __rePostalCode = re.compile(r"(\d{5})")
         try:
@@ -23,7 +52,6 @@ class VerificationsService:
         __reEmail = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
         try:
             if not re.match(__reEmail, email):
-                # print("isemail vérif NO")
                 return False
             return True
 
@@ -108,11 +136,6 @@ class VerificationsService:
         # values = map(lambda x: x.key, Roles)
         values = list(Roles.Roles)
         print(values)
-        # a = list(Roles)
-        # print(a)
-        # print(list(Roles.__members__.keys()))
-        # values = list(Roles.__members__.keys())
-        # values = [member.value for member in Roles]
         if role not in values:
             return True
         return True

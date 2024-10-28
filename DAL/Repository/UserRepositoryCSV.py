@@ -79,7 +79,7 @@ class UserRepositoryCSV():
         Add user in CSV file if user type is User & email doesn't exist
         """""
         print("usr - DAL create " + "-"*80)
-        print(user)
+        # print(user)
         if not User.IsInstanceOfUser(user):
             #  return None
             raise ValueError("Erreur dasn les paramètres")
@@ -106,13 +106,10 @@ class UserRepositoryCSV():
         if not self.__userIdExists(user):
             return None
         
-        print("REPO - Update 01")
         oldUser = self.__setUserValuesFromCVSToUserClassInstance(user)
 
-        print("REPO - Update 02")
         userUpdated = self.__updateUser(oldUser, user)
 
-        print("REPO - Update 03")
         return userUpdated
     
     
@@ -177,22 +174,20 @@ class UserRepositoryCSV():
         Private fonction 
         Update optimist user in CSV File
         """
-        print("REPO - __updateUser 01")
         newUser.UserId = oldUser.UserId
         
         df = self.FindAll()
-        selectedUserDf = df.loc[df['nom'] == oldUser.nom]
+        # selectedUserDf = df.loc[df['nom'] == oldUser.nom]
         result=User.ConstructUserAllAttributsFrormDf(oldUser.UserId, oldUser.nom, oldUser.mot_de_passe, oldUser.email, oldUser.code_postal, oldUser.age, oldUser.taille, oldUser.poids, Roles(oldUser.role), oldUser.UpdatedDate, oldUser.email, oldUser.code_postal)
         indexOldUser = df.index.get_loc(df[df["nom"]==oldUser.nom].index[0])
         mofified = False
-        print("REPO - __updateUser 02")
         if newUser.UserId != oldUser.UserId:
             if df['email'].isin([newUser.email]).any():
                 print(f"l'email modifier {newUser.email} pour l'utilisateur {oldUser.nom} est déjà utilisé, veuillez en rentrer un autre")
                 return None
 
         if oldUser.email != newUser.email:
-            selectedUserDf.at[oldUser.UserId,'email'] = newUser.email
+            # selectedUserDf.at[oldUser.UserId,'email'] = newUser.email
             result.email = newUser.email
             mofified = True
 
@@ -202,27 +197,27 @@ class UserRepositoryCSV():
         #     mofified = True
             
         if oldUser.role!= newUser.role:
-            selectedUserDf.at[oldUser.UserId,'role'] = newUser.role.value
+            # selectedUserDf.at[oldUser.UserId,'role'] = newUser.role.value
             result.role = newUser.role
             mofified = True
 
         if oldUser.age!= newUser.age:
-            selectedUserDf.at[oldUser.UserId,'age'] = newUser.age
+            # selectedUserDf.at[oldUser.UserId,'age'] = newUser.age
             result.age = newUser.age
             mofified = True
             
         if oldUser.taille!= newUser.taille:
-            selectedUserDf.at[oldUser.UserId,'taille'] = newUser.taille
+            # selectedUserDf.at[oldUser.UserId,'taille'] = newUser.taille
             result.taille = newUser.taille
             mofified = True
 
         if oldUser.poids!= newUser.poids:
-            selectedUserDf.at[oldUser.UserId,'poids'] = newUser.poids
-            result.poids = newUser.taille
+            # selectedUserDf.at[oldUser.UserId,'poids'] = int(newUser.poids)
+            result.poids = int(newUser.poids)
             mofified = True
 
         if oldUser.code_postal!= newUser.code_postal:
-            selectedUserDf.at[oldUser.UserId,'code_postal'] = newUser.code_postal
+            # selectedUserDf.at[oldUser.UserId,'code_postal'] = newUser.code_postal
             result.code_postal = newUser.code_postal
             mofified = True
 
@@ -230,17 +225,12 @@ class UserRepositoryCSV():
             print("No modification detected.")
             return None
         
-        print("REPO - __updateUser 03")
 
         newUser.CreatedDate = oldUser.CreatedDate
-        print("REPO - __updateUser 03-1")
         newUser.set_UpdatedDate()
-        newUser.poids = round(newUser.poids, 0)
-        print("REPO - __updateUser 03-2")
-        print("user to update ")
-        print(newUser)
+        newUser.poids = int(round(newUser.poids, 0))
+        print(newUser.__dict__)
         try:
-            print("REPO - __updateUser 04")
             self.__setHeader()
             df.drop(index=[indexOldUser], inplace = True)
             newUserDf = pd.DataFrame(newUser.__dict__ , index=[0])

@@ -1,5 +1,5 @@
 import streamlit as st
-from services.Verifications import VerificationsService
+from services.VerificationsService import VerificationsService
 # from services.connectionService import ConnectService
 from Transiant.transiant_connection import transiant_connection
 from services.connectionService import ConnectService
@@ -28,11 +28,10 @@ def show_login():
             if user is None:
                 reason="Connexion impossible"
                 msg = "Vos identifiants ne sont pas reconnus"
-                # DialogError("Connexion impossible")
-                # DialogBox.DLgInfoMessage(reason,msg)
-                dg = DialogBox()
-                dg.DLgInfoMessage(reason,msg)
-                del dg
+                DialogBox.DLgInfoMessage(reason,msg)
+                # dg = DialogBox()
+                # dg.DLgInfoMessage(reason,msg)
+                # del dg
                 return
             # myUserConnected = UserConnected(user.email,user.UserId, user.nom)
             # print(myUserConnected.__dir__)

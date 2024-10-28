@@ -1,6 +1,8 @@
 import streamlit as st
 
 def show_home():
+    st.session_state.active_page = "home_page"
+
     # Titre principal
     st.title("Projet Streamlit : Initiation")
 

@@ -2,12 +2,21 @@ import os
 import logging
 import streamlit as st
 import directory as pg
+import re
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler, FileSystemEventHandler
-# from streamlit_navigation_bar import st_navbar 
+
+####################### LOGIN OK
+# kiki@free.fr / 1234
+# lol@free.fr /1234
+
 
 # Configuration de la page
-st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded", page_icon="📊")
+if "user_email" in st.session_state:
+    st.set_page_config(page_title=f"user : {st.session_state.user_email}", initial_sidebar_state="expanded")
+else:
+    st.set_page_config(page_title="Steamlit projet", initial_sidebar_state="expanded")
+# st.set_page_config(page_title="Fonction affine", initial_sidebar_state="expanded", page_icon="📊")
 
 # Ajouter un logo
 logo_path = "img/logo.png" 
@@ -19,126 +28,62 @@ st.image(logo_path, width=450)
 #     </div>
 #     """, unsafe_allow_html=True
 # )
-################################################################# login
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+if "visibility" not in st.session_state:
+    st.session_state.visibility = "visible"
+    st.session_state.disabled = False
+if "active_page" not in st.session_state:
+    st.session_state.active_page = "login_page"
 
-def login():
-    if st.button("Log in"):
-        st.session_state.logged_in = True
-        st.rerun()
-
-def logout():
-    if st.button("Log out"):
-        st.session_state.logged_in = False
-        st.rerun()
-################################################################# page
-
+################################################################# menu
 # icone : https://mui.com/material-ui/material-icons/
-login_page = st.Page(login, title="Log in", icon=":material/login:")
-logout_page = st.Page(logout, title="Log out", icon=":material/logout:")
+login_page = st.Page(("directory/connection/login.py"), title="Log in", icon=":material/login:")
+logout_page = st.Page("directory/connection/logout.py", title="Log out", icon=":material/logout:")
 
-documentation = st.Page(
+documentation_page = st.Page(
     "directory/documentation.py", title="Documentation", icon=":material/dashboard:"
 )
-fonctionAffine = st.Page(
+fonctionAffine_page = st.Page(
     "directory/fonctionAffine.py", title="Fonction affine", icon=":material/functions:"
 )
-hello = st.Page(
+hello_page = st.Page(
     "directory/hello.py", title="Hello", icon=":material/waving_hand:"
 )
-home = st.Page(
+home_page = st.Page(
     "directory/home.py", title="Home", default=True, icon=":material/home:"
 )
+
+user_page = st.Page(
+    "directory/user.py",title="REgister", icon=":material/account_circle:"
+)
+
 if st.session_state.logged_in:
     pg = st.navigation(
         {
             "Account": [logout_page],
-            "Accueil": [home, hello],
-            "Tools": [fonctionAffine],
-            "Documentation": [documentation],
+            "Accueil": [home_page, hello_page],
+            "Tools": [fonctionAffine_page],
+            "Documentation": [documentation_page],
+            "Compte utilisateur":[user_page]
         }
     )
+
 else:
-    pg = st.navigation([login_page])
+    if "user_email" in st.session_state:
+        del st.session_state["user_email"]
+
+    left, right = st.columns(2)
+
+    if left.button("Nouvel utilisateur", icon="😃", use_container_width=True, key="new_user") or st.session_state.active_page == "user_page":
+        st.session_state.active_page = "user_page"
+        pg = st.navigation([user_page])
+
+    if right.button("login", icon="🔥", use_container_width=True, key="login") or st.session_state.active_page == "login_page":
+        pg = st.navigation([login_page])
 
 pg.run()
-################################################################# menu
-# st.set_page_config(initial_sidebar_state="expanded")
-
-# Définir les pages
-# pages = ["Home", "Documentation", "Fonction Affine"]
-# # page = ["Home", "Documentation", "Hello", "Fonction Affine", "About"]
-
-# styles = {
-#     "nav": {
-#         "background-color": "royalblue",
-#         "justify-content": "left",
-#         # "background-color": "white",
-#     },
-#     "img": {
-#         "padding-right": "14px",
-#     },
-#     "span": {
-#         "color": "white",
-#         "padding": "14px",
-#     },
-#     "active": {
-#         "background-color": "white",
-#         "color": "white",
-#         "font-weight": "normal",
-#         "padding": "14px",
-#     }
-# }
-# # Contenu principal
-# if pages == "Documentation":
-#     st.switch_page("pages/documentation.py")
-# # elif page == "Hello":
-# #     st.switch_page("pages/hello.py")
-# elif pages == "Fonction Affine":
-#     st.switch_page("pages/fonctionAffine.py")
-# # elif page == "About":
-# #     st.switch_page("pages/about.py")
-# else:
-#     st.switch_page("pages/home.py")
-
-# match pages:
-#     case "Documentation":
-#         st.switch_page("pages/documentation.py")
-#     case "Fonction Affine":
-#         st.switch_page("pages/fonctionAffine.py")
-#     case _:
-#         st.switch_page("pages/home.py")
-
-
-
-
-
-# options = {
-#     "show_menu": True,
-#     "show_sidebar": False,
-# }
-
-# page = st_navbar(
-#     pages,
-#     # logo_path=logo_path,
-#     # urls=urls,
-#     styles=styles,
-#     options=options,
-# )
-
-# functions = {
-#     "Home": pg.show_home,
-#     "Documentation": pg.show_documentation,
-#     "Fonction Affine": pg.show_fonctionAffine,
-#     # "API": pg.show_api,
-#     # "Examples": pg.show_examples,
-#     # "Community": pg.show_community,
-# }
-# go_to = functions.get(page)
-# if go_to:
-#     go_to()
-
 
 ################################################################# log
 # Créer le dossier log s'il n'existe pas
@@ -150,18 +95,6 @@ logging.basicConfig(level=logging.INFO,  # Définir le niveau de journalisation
                     datefmt='%Y-%m-%d %H:%M:%S',
                     filename='log/file_changes.log',  # Fichier journal
                     filemode='w')  # Mode d'écriture
-
-# logger_blacklist = [
-#     '.streamlist',
-#     'Log',
-# ]
-
-# logger = logging.getLogger()  # Création d'un logger
-
-
-
-
-
 
 # Gestionnaire d'événements pour la surveillance de fichiers
 class MyHandler(FileSystemEventHandler):
@@ -177,17 +110,15 @@ class MyHandler(FileSystemEventHandler):
 # Configurer l'observateur pour surveiller les modifications dans le répertoire courant
 event_handler = MyHandler()  # Créer une instance de LoggingEventHandler
 observer = Observer()  # Créer un observateur
-# path = '.'  # Surveiller le répertoire courant
-# for module in logger_blacklist :
-#     observer.schedule(event_handler, path, recursive=True)  # Planifier l'observateur
+
 observer.start()  # Démarrer l'observateur
 
-logger_blocklist = [
+logger_blocklist = [ # Surveiller le répertoire suivant
     ".",
     "directory",
     "data",
     "img",
 ]
 
-for module in logger_blocklist:
-    observer.schedule(event_handler, module, recursive=False)
+# for module in logger_blocklist:
+#     observer.schedule(event_handler, module, recursive=False)

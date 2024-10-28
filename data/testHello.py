@@ -29,7 +29,7 @@ def test_load_data(mocker):
     
 df_iris = load_data()  # Remplacez par l'appel de votre fonction
 
-print(df_iris)
+# print(df_iris)
 
 assert not df_iris.empty
 assert df_iris.shape[0] == 150
